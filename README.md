@@ -1,2 +1,3 @@
-# labs
-iximiuz Labs roadmap, feature requests, and bug reports
+# iximiuz Labs
+
+Roadmap(s), feature requests, and bug reports.
