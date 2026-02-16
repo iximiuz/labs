@@ -1,0 +1,31 @@
+Welcome to iximiuz Labs' Kamal Playground! 🚀
+
+Basecamp's Kamal is a simple but powerful tool to deploy containerized apps to
+remote servers via SSH. Kamal uses an imperative model, doesn't require
+installation on the target servers, and can leverage almost any IaaS provider
+or on-premises infrastructure.
+
+This is a multi-node playground with the following VMs:
+
+- dev-machine: your "local" machine with `kamal` CLI installed.
+- server-{01,02}: target VMs to deploy your apps with `kamal`.
+
+Get started with a simple web app:
+
+```
+cd ~/svc-a
+kamal setup
+
+curl -H 'Host: svc-a-web' 172.16.0.3  # server-01
+curl -H 'Host: svc-a-web' 172.16.0.4  # server-02
+```
+
+Find more about Kamal:
+
+* Documentation https://kamal-deploy.org/
+* GitHub repository https://github.com/basecamp/kamal
+
+Playground VMs are ephemeral and short-lived — terminating a VM purges
+all data, including images in the private registry. Please, do not use
+playgrounds for processing critical or sensitive information.
+

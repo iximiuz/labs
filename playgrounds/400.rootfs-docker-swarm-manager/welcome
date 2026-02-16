@@ -1,0 +1,25 @@
+Welcome to iximiuz Labs' Docker Swarm Playground! 🚀
+
+This is a multi-node sandbox with the batteries included:
+
+- manager VM: Docker Swarm manager node.
+- worker VMs: Docker Swarm worker nodes.
+- registry.iximiuz.com: private and ephemeral Docker registry.
+- dive, regctl, crane, arkade, and other tools pre-installed.
+
+Get started with a simple service:
+
+```
+docker service create \
+  --replicas 3 \
+  --publish published=80,target=80 \
+  nginx
+
+curl 127.0.0.1
+```
+
+Find more about Swarm mode:
+
+* Documentation https://docs.docker.com/engine/swarm/
+* Step-by-step tutorial https://docs.docker.com/engine/swarm/stack-deploy/
+

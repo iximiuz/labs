@@ -1,0 +1,27 @@
+Welcome to iximiuz Labs' K3s Playground! 🚀
+
+Experiment with a multi-node Kubernetes cluster in a safe and isolated environment.
+
+Batteries included:
+
+- helm, krew, kubectx, kubens, k9s: Essential Kubernetes tools.
+- kexp: Visual Kubernetes Explorer with a dynamical object graph.
+- dive: A CLI to explore container images and layers.
+- cdebug: A swiss army knife of container debugging.
+- crane: A CLI to manipulate container images.
+- regctl: A CLI to interact with container registries.
+- vim, fzf, ripgrep: Command-line file editing and searching.
+- fx, jq, yq: Powerful JSON and YAML viewers and processors.
+- curl, socat, websocat: A comprehensive networking toolkit.
+- arkade: An efficient installer for additional tools you might require.
+
+Additional services at your disposal:
+
+* Port publishing: Showcase your app with its own public URL.
+* Terminal sharing: Collaborate seamlessly by sharing your terminal session.
+* registry.iximiuz.com: A private hub to push and pull container images.
+
+Playground VMs are ephemeral and short-lived — terminating a VM purges
+all data, including images in the private registry. Please, do not use
+playgrounds for processing critical or sensitive information.
+

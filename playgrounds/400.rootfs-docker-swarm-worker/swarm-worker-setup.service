@@ -1,0 +1,13 @@
+[Unit]
+Description=Docker Swarm Worker Setup Service
+After=docker.service
+Requires=docker.service
+
+[Service]
+Type=oneshot
+ExecStart=/opt/iximiuz-labs/swarm-worker-setup.sh
+Restart=on-failure
+RestartSec=2
+
+[Install]
+WantedBy=multi-user.target

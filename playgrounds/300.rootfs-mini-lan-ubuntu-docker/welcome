@@ -1,0 +1,27 @@
+Welcome to iximiuz Labs' MiniLAN Playground! 🚀
+
+Three interconnected Ubuntu VMs residing in a private LAN to experiment
+with networking and/or distributed systems concepts.
+
+Batteries included:
+
+- Docker: No dev environment is complete without it.
+- dive: A CLI to explore container images and layers.
+- cdebug: A swiss army knife of container debugging.
+- crane: A CLI to manipulate container images.
+- regctl: A CLI to interact with container registries.
+- vim, fzf, ripgrep: Command-line file editing and searching.
+- fx, jq, yq: Powerful JSON and YAML viewers and processors.
+- curl, socat, websocat: A comprehensive networking toolkit.
+- arkade: An efficient installer for additional tools you might require.
+
+Additional services at your disposal:
+
+* Port publishing: Showcase your app with its own public URL.
+* Terminal sharing: Collaborate seamlessly by sharing your terminal session.
+* registry.iximiuz.com: A private hub to push and pull container images.
+
+Playground VMs are ephemeral and short-lived — terminating a VM purges
+all data, including images in the private registry. Please, do not use
+playgrounds for processing critical or sensitive information.
+

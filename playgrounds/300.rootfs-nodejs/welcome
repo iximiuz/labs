@@ -1,0 +1,20 @@
+Welcome to iximiuz Labs' Node.js Programming Playground! 🚀
+
+Get a disposable Node.js development environment in seconds.
+
+Batteries included:
+
+- VS Code: A powerful web IDE with Node.js addons installed.
+- Docker: No dev environment is complete without them.
+- vim, fzf, ripgrep: Command-line file editing and searching.
+
+Additional services at your disposal:
+
+* Port publishing: Showcase your app with its own public URL.
+* Terminal sharing: Collaborate seamlessly by sharing your terminal session.
+* registry.iximiuz.com: A private hub to push and pull container images.
+
+Playground VMs are ephemeral and short-lived — terminating a VM purges
+all data, including images in the private registry. Please, do not use
+playgrounds for processing critical or sensitive information.
+

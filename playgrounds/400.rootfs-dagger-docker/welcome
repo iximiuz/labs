@@ -1,0 +1,19 @@
+Welcome to iximiuz Labs' Dagger Playground! 🚀
+
+This is a 4-in-1 playground to explore Dagger - a powerful
+development workflow automation engine.
+
+You're on the Docker host with Dagger CLI installed.
+
+Get started with:
+
+```
+mkdir ~/my-project
+cd ~/my-project
+
+dagger init --sdk=go  # ...or typescript|python
+dagger functions
+```
+
+For more, see: https://docs.dagger.io
+

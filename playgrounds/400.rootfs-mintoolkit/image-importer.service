@@ -1,0 +1,13 @@
+[Unit]
+Description=Image Importer Service
+After=docker.service
+Requires=docker.service
+
+[Service]
+Type=oneshot
+ExecStart=/opt/iximiuz-labs/image-importer.sh
+Restart=on-failure
+RestartSec=1s
+
+[Install]
+WantedBy=multi-user.target

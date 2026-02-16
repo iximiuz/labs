@@ -1,0 +1,12 @@
+[Unit]
+Description=Docker Image Load Service
+After=multi-user.target
+
+[Service]
+Type=simple
+ExecStart=/opt/iximiuz-labs/load-images.sh
+Restart=on-failure
+RestartSec=1s
+
+[Install]
+WantedBy=multi-user.target

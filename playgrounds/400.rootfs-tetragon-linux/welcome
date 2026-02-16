@@ -1,0 +1,15 @@
+Welcome to iximiuz Labs' Tetragon Playground! 🚀
+
+This is a 3-in-1 playground to explore Tetragon in Kubernetes,
+Docker, and vanilla Linux environments.
+
+You're on the Linux host with Tetragon running in a systemd service.
+
+Get started with:
+
+```
+sudo tetra getevents -o compact
+```
+
+For more, see: https://tetragon.io/docs/getting-started/
+

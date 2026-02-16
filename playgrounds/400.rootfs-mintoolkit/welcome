@@ -1,0 +1,29 @@
+Welcome to iximiuz Labs' minT(oolkit) Playground! 🚀
+
+minT(oolkit), formerly known as DockerSlim, is an open-source tool for
+building optimized container images. Don't change anything in your
+container image and minify it by up to 30x (and for compiled languages
+even more) making it more secure, too!
+
+Getting started:
+
+- Run `mint` with no arguments to activate the interactive mode.
+- Check out the `~/mintoolkit/examples` directory for examples.
+- Try minifying the stock Nginx container image:
+
+```
+# ~180MB
+docker images nginx
+
+mint build nginx
+
+# ~15MB
+docker run -d -p 8080:80 nginx.slim
+
+curl http://localhost:8080
+```
+
+More:
+- https://github.com/mintoolkit/mint
+- https://github.com/mintoolkit/examples
+

@@ -1,0 +1,31 @@
+Welcome to iximiuz Labs' Incus Playground! 🚀
+
+Started as a community fork of (now Canonical's) LXD project,
+Incus is a container and VM manager that provides a unified
+experience for running and managing full Linux systems inside
+containers or VMs.
+
+```
+# Launch containers
+incus launch images:ubuntu/22.04 first
+incus launch images:alpine/edge second
+
+# Execute a command in a container
+incus exec first -- bash
+incus exec second -- uname -a
+
+# Stop and delete a container
+incus stop first
+incus delete first
+```
+
+Find more about Incus:
+
+* GitHub repository https://github.com/lxc/incus
+* Documentation https://linuxcontainers.org/incus/
+* Official playground https://linuxcontainers.org/incus/try-it/
+
+Playground VMs are ephemeral and short-lived — terminating a VM purges
+all data, including images in the private registry. Please, do not use
+playgrounds for processing critical or sensitive information.
+
