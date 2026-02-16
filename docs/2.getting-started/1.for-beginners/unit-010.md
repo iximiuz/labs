@@ -46,6 +46,26 @@ While going through the above materials, you'll get to solve [many practical Lin
 Some in the form of complementary challenges, some as subtasks of Docker or networking challenges.
 In any case, you'll become much more fluent and confident in using the terminal and operating servers.
 
+For people with prior Linux and container experience, or those who are eager to jump right into Kubernetes,
+we recommend starting with the [How Kubernetes Reinvented Virtual Machines](/tutorials/kubernetes-vs-virtual-machines) tutorial.
+This tutorial provides a certain perspective that will help you connect the dots between the traditional VM model,
+containers, and orchestrators like Kubernetes.
+
+The next logical step is to take the [Docker Containers vs. Kubernetes Pods](/tutorials/containers-vs-pods) tutorial,
+and finally get your hands dirty by solving [practical Kubernetes challenges](/challenges?category=kubernetes&difficulty=easy&difficulty=medium&filter=all).
+
+::slide-show
+---
+slides:
+- image: __static__/vm-service.png
+  alt: A group of virtual machines constituting a service.
+- image: __static__/deployment-2000-opt.png
+  alt: Kubernetes Deployment - a means to replicate Pods.
+- image: __static__/canary-2000-opt.png
+  alt: A single Kubernetes Service fronting two Deployments.
+---
+::
+
 Finally, we need to emphasise that iximiuz Labs is not a single course but a holistic learning and experimentation platform.
 One of the key features of iximiuz Labs is its [Playgrounds](/playgrounds).
 In essence, they are remote, preconfigured Linux VMs that are ideal for practicing Linux,
