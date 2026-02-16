@@ -35,7 +35,7 @@ Some remote content has a random hex suffix (e.g., `docker-101-container-exec-6e
 
 ### Content Format Reference
 
-Before creating or editing content, fetch the self-documenting format samples from the [rules](rules/) directory. The rules reference sample files in the [iximiuz/labs-content-samples](https://github.com/iximiuz/labs-content-samples) repository.
+Before creating or editing content, fetch the self-documenting format samples from the [rules](rules/) directory. The rules reference sample files in the [iximiuz/labs](https://github.com/iximiuz/labs/tree/main/content-samples) repository (see the `content-samples` subfolder).
 
 ## Playgrounds
 

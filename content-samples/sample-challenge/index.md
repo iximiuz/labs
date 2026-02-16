@@ -133,7 +133,7 @@ tasks:
 ---
 
 This sample material serves as a guide on how to author **challenges** on iximiuz Labs.
-You can find the source of this document on [GitHub](https://github.com/iximiuz/labs-content-samples/tree/main/sample-challenge).
+You can find the source of this document on [GitHub](https://github.com/iximiuz/labs/tree/main/content-samples/sample-challenge).
 Feel free to use it as a starting point for your own challenges.
 
 

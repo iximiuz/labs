@@ -27,7 +27,7 @@ cover: __static__/cover.png
 ---
 
 This is a self-documenting sample that serves as a guide on how to author **Skill Paths** on iximiuz Labs.
-You can find the source of this document on [GitHub](https://github.com/iximiuz/labs-content-samples/tree/main/sample-skill-path).
+You can find the source of this document on [GitHub](https://github.com/iximiuz/labs/tree/main/content-samples/sample-skill-path).
 Feel free to use it as a starting point for your own skill paths.
 
 ## What is a Skill Path on iximiuz Labs?

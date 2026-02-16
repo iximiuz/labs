@@ -287,7 +287,7 @@ challenges:
 ---
 
 This is a self-documenting sample that serves as a guide on how to author **tutorials** on iximiuz Labs.
-You can find the source of this document on [GitHub](https://github.com/iximiuz/labs-content-samples/tree/main/sample-tutorial).
+You can find the source of this document on [GitHub](https://github.com/iximiuz/labs/tree/main/content-samples/sample-tutorial).
 Feel free to use it as a starting point for your own tutorials.
 
 
@@ -611,7 +611,7 @@ Inline code elements and code blocks are supported with the standard single- and
 For code blocks, you can optionally specify the language to enable syntax highlighting,
 add a (file)name to display in the code block, and highlight specific lines.
 
-Look up the below code snippet in the source of this tutorial on [GitHub](https://github.com/iximiuz/labs-content-samples/blob/main/sample-tutorial/index.md) to see how it's done:
+Look up the below code snippet in the source of this tutorial on [GitHub](https://github.com/iximiuz/labs/blob/main/content-samples/sample-tutorial/index.md) to see how it's done:
 
 ```yaml [~/my/file.yaml]{2,9-11}
 apiVersion: apps/v1
@@ -1164,7 +1164,7 @@ Tasks in iximiuz Labs are used to:
 - Interact with the user and check that certain actions are performed correctly.
 
 This sample tutorial demonstrates how to use all three types of tasks.
-Refer to the [source of this tutorial on GitHub](https://github.com/iximiuz/labs-content-samples/blob/main/sample-tutorial/index.md)
+Refer to the [source of this tutorial on GitHub](https://github.com/iximiuz/labs/blob/main/content-samples/sample-tutorial/index.md)
 to see how the tasks are defined in the tutorial's Front Matter.
 
 ### Initialization Task
