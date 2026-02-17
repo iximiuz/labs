@@ -10,15 +10,18 @@ kind: unit
 Linux, networking, containers, Kubernetes, and everything in between.
 ::
 
-## Playgrounds
+## Learning by Doing
 
-Instead of watching demos or reading theory in isolation, iximiuz Labs lets you practice in realistic but safe remote sandboxes called [Playgrounds](/docs/playgrounds/what-are-playgrounds).
+Instead of passively watching YouTube tutorials or reading dry theory,
+on iximiuz Labs you are expected to learn by doing.
+But fear not, you will practice in realistic yet safe remote sandboxes carefully crafted by the iximiuz Labs team.
 
-Playgrounds are fast-booting Linux microVMs (often multi-VM, multi-network, with optional extra disks) that run on a fleet of large bare-metal servers maintained by the iximiuz Labs team.
-You can start a playground right from your browser or via the [labctl CLI](/docs/playgrounds/how-to-use-playgrounds#cli).
+Our [Playgrounds](/docs/playgrounds/what-are-playgrounds) are fast-booting Linux microVMs that run on a fleet of large bare-metal servers.
+You can start a playground right from your browser or via a handy CLI tool called [labctl](/docs/playgrounds/how-to-use-playgrounds#cli).
 Once up and running, accessing a playground is no different from SSH-ing into a remote server rented from your favorite VPS or Cloud provider.
 
-Install software, break things, debug, rebuild - then throw the environment away (or keep it, if you're on a plan with [persistence](/docs/playgrounds/persistent-playgrounds)).
+Install software, break things, debug, rebuild, try multi-VM, multi-network, multi-disk setups - and then throw the environment away
+(or keep it, if you're on a plan with [persistence](/docs/playgrounds/persistent-playgrounds)).
 
 ::slide-show
 ---
@@ -39,11 +42,16 @@ slides:
 
 On top of Playgrounds, iximiuz Labs offers a **growing collection of learning materials** that give you structure and feedback:
 
-- [Challenges](/docs/learning-materials/challenges) - bite-sized, realistic, hands-on problems with auto-checking, hints, and solutions
-- [Tutorials](/docs/learning-materials/tutorials) - deep and heavily illustrated articles with reproducible steps and attached Playgrounds
+- [Challenges](/docs/learning-materials/challenges) - bite-sized, realistic, hands-on problems with solution auto-checking and hints
+- [Tutorials](/docs/learning-materials/tutorials) - deep, illustrated articles with reproducible steps and attached Playgrounds
 - [Courses](/docs/learning-materials/courses) - guided sequences that combine lessons with hands-on completion criteria
 - [Skill Paths](/docs/learning-materials/skill-paths) - focused learning paths to acquire or hone specific skills or technologies
 - [Roadmaps](/docs/learning-materials/roadmaps) - broader learning journeys to master a certain domain (Linux, Docker, or Kubernetes)
+
+::highlight
+The ultimate goal is simple: **learn the fundamentals by doing** -
+with enough realism to transfer to the job, and enough safety to experiment freely.
+::
 
 ::slide-show
 ---
@@ -64,9 +72,4 @@ slides:
   alt: "Roadmap example: Learn Docker the Hands-on Way"
   description: "Roadmap example: Learn Docker the Hands-on Way"
 ---
-::
-
-::highlight
-The ultimate goal is simple: **learn the fundamentals by doing** -
-with enough realism to transfer to the job, and enough safety to experiment freely.
 ::

@@ -5,6 +5,8 @@ name: for-beginners
 kind: unit
 ---
 
+## Linux and Containers
+
 At the moment, for a Linux/DevOps beginner, the best place to start at iximiuz Labs is the [hands-on Docker roadmap](/roadmaps/docker).
 We recommend solving hands-on challenges from the roadmap,
 starting from the top, and always following the links to the theoretical materials that most challenges include.
@@ -19,7 +21,13 @@ there might be an alternative or simpler way, and the editorial solutions may sh
 Roadmap: [Docker The Hands-on Way](/roadmaps/docker)
 ::
 
-Another beginner-friendly piece of learning materials is the [L2 Networking Fundamentals course](/courses/computer-networking-fundamentals),
+While going through the roadmap materials, you'll get to solve [many practical Linux problems](/challenges?filter=all&category=linux).
+Some in the form of complementary challenges, some as subtasks of Docker-focused challenges.
+In any case, you'll become much more fluent and confident in using the terminal and operating servers.
+
+## Networking
+
+Another beginner-friendly portion of learning materials is the [L2 Networking Fundamentals course](/courses/computer-networking-fundamentals),
 augmented by these L3 challenges:
 
 - [Configure Routes to Connect Two Private Networks](/challenges/networking-configure-basic-routing)
@@ -28,7 +36,7 @@ augmented by these L3 challenges:
 The above networking materials can be taken before, after, or in parallel with the Docker roadmap.
 
 After getting through a couple of dozen Docker challenges and studying the networking fundamentals materials,
-it's a great time to take the [Container Networking from Scratch](/tutorials/container-networking-from-scratch) tutorial.
+it's a good time to take the [Container Networking from Scratch](/tutorials/container-networking-from-scratch) tutorial.
 
 ::image-box
 ---
@@ -42,13 +50,11 @@ it's the foundation everyone needs before approaching the more complex Kubernete
 and it'll also come in handy while learning other virtualization tech
 (e.g., Firecracker, QEMU, VirtualBox VMs, Lima, Kata Containers, etc.).
 
-While going through the above materials, you'll get to solve [many practical Linux problems](/challenges?filter=all&category=linux).
-Some in the form of complementary challenges, some as subtasks of Docker or networking challenges.
-In any case, you'll become much more fluent and confident in using the terminal and operating servers.
+## Kubernetes
 
-For people with prior Linux and container experience, or those who are eager to jump right into Kubernetes,
+For people with prior Linux and container experience, or those who are eager to jump straight into Kubernetes,
 we recommend starting with the [How Kubernetes Reinvented Virtual Machines](/tutorials/kubernetes-vs-virtual-machines) tutorial.
-This tutorial provides a certain perspective that will help you connect the dots between the traditional VM model,
+This tutorial provides a unique perspective that will help you connect the dots between the traditional VM model,
 containers, and orchestrators like Kubernetes.
 
 The next logical step is to take the [Docker Containers vs. Kubernetes Pods](/tutorials/containers-vs-pods) tutorial,
@@ -66,7 +72,9 @@ slides:
 ---
 ::
 
-Finally, we need to emphasise that iximiuz Labs is not a single course but a holistic learning and experimentation platform.
+## Free-form Experimentation
+
+Finally, we need to emphasise that iximiuz Labs is not a single course but a fully-fledged learning and experimentation platform.
 One of the key features of iximiuz Labs is its [Playgrounds](/playgrounds).
 In essence, they are remote, preconfigured Linux VMs that are ideal for practicing Linux,
 networking, Docker, or Kubernetes in a safe, controlled environment.
@@ -75,4 +83,7 @@ but you can (and should) use standalone playgrounds for your learning tasks, too
 
 A typical example: while studying system design, you may want to explore the traditional 3-tier web app architecture,
 and the best way to do it is to actually deploy an API server,
-a database, and a client with your own hands using some well-known sample applications like [Awesome Docker Compose samples](https://github.com/docker/awesome-compose) or [Kubernetes application examples](https://github.com/kubernetes/examples).
+a database, and a client and explore how they interact with each other.
+Luckily, there are some really good sample application collections, which you can deploy to your playground -
+see [Awesome Docker Compose samples](https://github.com/docker/awesome-compose) or [Kubernetes application examples](https://github.com/kubernetes/examples).
+Plus, you can find some inspiration by browsing our [Community Playgrounds](/playgrounds?filter=community) catalog.
