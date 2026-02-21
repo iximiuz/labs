@@ -105,43 +105,7 @@ ssh remote-docker
 
 ### Unlocking advanced use cases
 
-More importantly, the above alias will unlock much more advanced use cases,
-such as **using the playground VM as a remote Docker context**:
+More importantly, the above alias will unlock much more advanced use cases, such as:
 
-```sh
-docker context create remote-docker --docker "host=ssh://remote-docker"
-```
-
-To verify that the remote Docker context is working, run:
-
-```sh
-docker --context remote-docker run nginx:alpine
-```
-
-The above command will use a local `docker` CLI installed on your machine to access the remote Docker engine running on the playground VM (i.e., the playground VM will act as a Docker host).
-
-You can also **use the playground VM as a remote Docker builder**:
-
-```sh
-docker buildx create --name remote-builder --driver docker-container remote-docker
-```
-
-To build a container image using such a remote builder, run:
-
-```sh
-docker buildx build --builder remote-builder \
-  --push -t registry.iximiuz.com/my-image:latest -f - . <<EOF
-FROM alpine:3
-
-RUN echo "Hello, World!" > /hello.txt
-EOF
-```
-
-The above command will use a local `docker` CLI installed on your machine to trigger a Docker build on the playground VM
-(i.e., the playground VM will act as a Docker builder) and push the resulting image to the playground VM's private registry.
-
-To verify that the image is available in the playground VM's private registry, ssh to the playground VM and run:
-
-```sh
-regctl tag ls registry.iximiuz.com/my-image
-```
+ - [Using playground VMs as remote Docker context](/docs/playground-recipes/remote-docker-host#remote-docker-context)
+ - [Using playground VMs as remote Docker builders](https://labs-dev.iximiuz.com/docs/playground-recipes/remote-docker-host#remote-docker-builder)
