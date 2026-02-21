@@ -66,8 +66,10 @@ docker --context remote-docker \
     run -d --restart always -p 8080:80 nginx:alpine
 ```
 
-The above command will use a local `docker` CLI to access the remote Docker engine running on the playground VM
-(i.e., the playground VM will act as a Docker host).
+::remark-box
+The above command uses a local `docker` CLI to access the remote Docker engine running on the playground VM
+(i.e., the playground VM acts as a Docker host).
+::
 
 Since the container is running on the playground VM, its port will be published only remotely.
 To access it from your local machine, you need to additionally forward it using the following command:
