@@ -18,7 +18,7 @@ tagz:
   - tutorial-docs
 
 createdAt: 2025-03-28
-updatedAt: 2025-09-06
+updatedAt: 2026-02-21
 
 cover: __static__/cover.png
 
@@ -442,8 +442,8 @@ tasks:                 # optional
     ...
 
 challenges:            # optional
-  challenge_key_1: {}
-  challenge_key_2: {}
+  challenge-name-1: {}
+  challenge-name-2: {}
 ---
 ```
 ::
@@ -853,13 +853,13 @@ A _challenge card_ is a rich link to the corresponding challenge that shows a pr
 some metadata, and a button to start the challenge.
 Authors can embed any challenges listed in the public [challenges catalog](/challenges) or prepare their own [challenges](/new/challenge).
 
-Challenges are embedded into the tutorial using the `card` component with the corresponding challenge ~~name~~ key:
+Challenges are embedded into the tutorial using the `card` component with the corresponding challenge name:
 
 ```markdown
 ::card
 ---
 # challenges is an object in the tutorial's front matter
-:challenge: challenges.<challenge_key>
+:challenge: challenges.<challenge-name>
 ---
 ::
 ```
@@ -872,8 +872,8 @@ kind: tutorial
 title: ...
 
 challenges:
-  <challenge_key_1>: {}
-  <challenge_key_2>: {}
+  <challenge-name-1>: {}
+  <challenge-name-2>: {}
 ---
 ```
 
@@ -892,23 +892,13 @@ Examples:
 ::
 
 ::remark-box
+**A challenge name is the last segment of the challenge's URL.** For example, for a challenge located at the following URL:
 
-To get a challenge key, take the challenge name (the last segment of the challenge's URL) and replace all `-` with `_`.
-The substitution is needed because `challenges` in the front matter is an object,
-so having a dash in the challenge name would break the object key syntax.
-
-Example:
-
-```
-# Challenge URL
+```text
 https://labs.iximiuz.com/challenges/docker-101-container-run
-
-# Challenge name
-docker-101-container-run
-
-# Challenge key
-docker_101_container_run
 ```
+
+...the challenge name is `docker-101-container-run`.
 ::
 
 
