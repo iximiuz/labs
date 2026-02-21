@@ -6,15 +6,15 @@ title: Tutorial 1
 name: tutorial-1
 
 createdAt: 2024-09-01
-updatedAt: 2024-09-01
+updatedAt: 2026-02-21
 
 tutorials:
-  extracting_container_image_filesystem: {}
+  extracting-container-image-filesystem: {}
 ---
 
 ::card
 ---
-:content: tutorials.extracting_container_image_filesystem
+:content: tutorials.extracting-container-image-filesystem
 ---
 ::
 

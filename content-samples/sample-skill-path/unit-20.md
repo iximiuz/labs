@@ -6,10 +6,10 @@ title: Challenge 1
 name: challenge-1
 
 createdAt: 2024-09-01
-updatedAt: 2024-09-01
+updatedAt: 2026-02-21
 
 challenges:
-  kubernetes_pod_with_faulty_init_sequence: {}
+  kubernetes-pod-with-faulty-init-sequence: {}
 ---
 
 **This unit demonstrates how to embed a challenge card.
@@ -21,7 +21,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut purus eget sapie
 
 ::card
 ---
-:challenge: challenges.kubernetes_pod_with_faulty_init_sequence
+:challenge: challenges.kubernetes-pod-with-faulty-init-sequence
 ---
 ::
 

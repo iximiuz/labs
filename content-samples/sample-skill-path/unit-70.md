@@ -1,28 +1,24 @@
 ---
 kind: unit
 
-title: Course Lesson (modular course)
+title: Roadmap
 
-name: course-lesson-modular
+name: roadmap
 
-createdAt: 2024-09-01
-updatedAt: 2024-09-01
+createdAt: 2026-02-21
+updatedAt: 2026-02-21
 
-courses:
-  containerd-cli:
-    lessons:
-      - ctr/container-management
+roadmaps:
+  docker: {}
 ---
 
 ::card
 ---
-:content: courses.containerd-cli
-:lesson: ctr/container-management
+:content: roadmaps.docker
 ---
 ::
 
-**Similarly to the flat course, you can embed an individual lesson from a modular course.
-The only difference is the lesson path, which in this case will have a module and a lesson slugs separated by a slash.**
+**A skill path unit can embed a roadmap. However, unlike other content types, a roadmap unit cannot yet be completed since the roadmap itself doesn't have a completion status.**
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut purus eget sapien. Nulla facilisi.
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut purus eget sapien. Nulla facilisi.
