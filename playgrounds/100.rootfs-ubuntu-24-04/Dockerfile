@@ -20,7 +20,7 @@ set -eu
 apt-get update
 apt-get upgrade -y
 
-apt-get install -y \
+apt-get install -y --no-install-recommends \
   bash-completion \
   bzip2 \
   ca-certificates \
@@ -62,6 +62,9 @@ yes | unminimize
 # Doesn't seem to be needed and produces extra noise in journald.
 systemctl mask networkd-dispatcher.service
 
+apt-get clean
+rm -rf /var/lib/apt/lists/*
+
 rm -rf /etc/update-motd.d/*
 rm -f /.dockerenv
 
@@ -75,7 +78,7 @@ RUN <<EOF
 set -eu
 
 apt-get update
-apt-get install -y openssh-server
+apt-get install -y --no-install-recommends openssh-server
 
 echo "HostKey /etc/ssh/ssh_host_ed25519_key" >> /etc/ssh/sshd_config
 echo "AuthenticationMethods publickey" >> /etc/ssh/sshd_config
@@ -93,6 +96,9 @@ rm -f /etc/systemd/system/ssh.socket.d/addresses.conf
 systemctl enable ssh.service
 
 rm -f /etc/ssh/ssh_host_*
+
+apt-get clean
+rm -rf /var/lib/apt/lists/*
 EOF
 
 
