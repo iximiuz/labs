@@ -11,6 +11,15 @@ Sometimes, you may want to run containers on a remote VM without having to SSH i
 It may be useful when your local machine lacks sufficient resources to run the containers,
 sits in a slow network, or you just want to keep your local machine clean and free of Docker-related clutter.
 
+::image-box
+---
+:src: __static__/docker-remote-context.png
+:alt: "Using an iximiuz Labs playground as a remote Docker context is a great way to run containers on a separate VM without having to SSH into it and keeping your local machine clean."
+---
+
+Using an iximiuz Labs playground as a remote Docker context is a great way to run containers on a separate VM without having to SSH into it and keeping your local machine clean.
+::
+
 ## Prerequisites
 
 - `docker` CLI (via [Docker Desktop](https://docs.docker.com/desktop/), [Docker Engine](https://docs.docker.com/engine/install/), or standalone installation)
