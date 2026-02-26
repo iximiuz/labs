@@ -1,5 +1,5 @@
 ---
-title: Custom Root FS
+title: Using custom rootfs images
 
 name: custom-rootfs
 kind: unit
@@ -13,25 +13,39 @@ It's possible to create a playground with a custom root filesystem, and there ar
 
 Depending on which approach you want to take, the process is some variant of the following:
 
-- create a Dockerfile locally that has all the things you want in it
+- Create a Dockerfile locally that has all the things you want in it
 
-- test that it builds okay
+- Test that it builds okay
 
-- push the built image to a container registry (preferably ghcr.io over dockerhub due to rate limiting)
+- Push the built image to a container registry (preferably ghcr.io; **note that Docker Hub is not supported** due to its strict rate limiting)
 
-- use that image as the drive for a custom playground via the web UI
-![using a custom oci URL in the playground UI](./custom-oci-web-ui.png)
-
-- use that image as the drive for a custom playground via a manifest.yaml file and push via `labctl`.
+- Use that image as the drive for a custom playground via a manifest.yaml file and push via `labctl`.
 
 ```yaml
-          drives:
-            - source: oci://ghcr.io/lpmi-13/amazing-demo-image:v1
-              mount: /
-              size: 30GiB
+kind: playground
+name: <playground-name>
+playground:
+  machines:
+    - name: <machine-name>    
+      drives:
+        - source: oci://ghcr.io/lpmi-13/amazing-demo-image:v1
+          mount: /
+          size: 30GiB
 ```
 
+- Use that image as the drive for a custom playground via the web UI
+
+::image-box
+---
+:src: __static__/custom-oci-web-ui.png
+:alt: Setting a custom OCI image as a VM drive rootfs source using the Playground Constructor UI.
+:border: 'border border-slate-400'
+:radius: 'lg'
+---
+
+Setting a custom OCI image as a VM drive rootfs source using the Playground Constructor UI.
+::
 
 ## Additional Resources
 
-- GET_BETTER_EMOJI [Writeup of one experience doing this](https://dev.to/lpmi13/custom-rootfs-for-playgrounds-in-iximiuz-labs-1p7g)
+- [Writeup of one experience doing this](https://dev.to/lpmi13/custom-rootfs-for-playgrounds-in-iximiuz-labs-1p7g)

@@ -1,7 +1,7 @@
 ---
-title: Custom Playgrounds
+title: Getting started
 
-name: custom-playgrounds
+name: getting-started
 kind: unit
 ---
 
