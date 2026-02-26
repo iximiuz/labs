@@ -108,4 +108,4 @@ ssh remote-docker
 More importantly, the above alias will unlock much more advanced use cases, such as:
 
  - [Using playground VMs as remote Docker context](/docs/playground-recipes/remote-docker-host#remote-docker-context)
- - [Using playground VMs as remote Docker builders](https://labs-dev.iximiuz.com/docs/playground-recipes/remote-docker-host#remote-docker-builder)
+ - [Using playground VMs as remote Docker builders](https://labs.iximiuz.com/docs/playground-recipes/remote-docker-host#remote-docker-builder)
