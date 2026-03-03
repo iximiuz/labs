@@ -33,6 +33,15 @@ To access a playground VM using the standard `ssh` command, you need to:
 Luckily, you don't need to do any of the above manually -
 the `labctl ssh-proxy` command will do all of the above for you.
 
+::image-box
+---
+:src: __static__/ssh-proxy.png
+:alt: "The `labctl ssh-proxy` command will start a foreground process that will forward all connections to the local port 2222 to the playground VM's SSHD port (22)."
+---
+
+The `labctl ssh-proxy` command will start a foreground process on your local machine that will forward all connections to the selected local port to the playground VM's SSHD port (22).
+::
+
 Here is a quick example of how to set up SSH access to a freshly started [Docker playground](/playgrounds/docker):
 
 ```sh
