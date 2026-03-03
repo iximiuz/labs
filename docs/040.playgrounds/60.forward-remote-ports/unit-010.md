@@ -7,7 +7,7 @@ kind: unit
 
 You can expose a service running on your local machine to the playground VM using the standard **SSH remote port forwarding**.
 Since the `labctl port-forward -R` flag is not supported yet,
-a workaround via `labctl ssh-proxy` and the standard `ssh -R` command should be used.
+a workaround via [`labctl ssh-proxy`](/docs/playgrounds/how-to-ssh) and the standard `ssh -R` command should be used.
 
 **Terminal 1:** Start an SSH proxy to the playground VM:
 
@@ -23,7 +23,19 @@ ssh -i ~/.ssh/iximiuz_labs_user \
   ssh://laborant@LOCAL_HOST:LOCAL_PORT
 ```
 
-Below are a few practical examples of how to use remote port forwarding.
+This capability comes in handy when you need to make a service running on your local machine (on intranet) accessible for services running in the remote playground.
+For example, you can use it to expose a Chrome's debugging port (9222) to a coding agent running in the sandbox VM (see [Chrome DevTools MCP](https://github.com/ChromeDevTools/chrome-devtools-mcp)). Or you can combine it with [exposing HTTP/HTTPS ports](/docs/playgrounds/expose-http-ports) to make a local web server accessible on a public URL.
+
+::image-box
+---
+:src: __static__/remote-port-forwarding.png
+:alt: "Exposing a local service to the playground VM using a reverse SSH tunnel (SSH -R) combined with the `labctl ssh-proxy` helper."
+---
+
+Exposing a local service to the playground VM using a reverse SSH tunnel (SSH -R) combined with the `labctl ssh-proxy` helper.
+::
+
+Below is a practical example of how to use remote port forwarding.
 
 ## Exposing a local web server to the playground VM
 
@@ -60,18 +72,3 @@ labctl ssh $PLAY_ID -- curl -s http://localhost:8080
 ```
 
 The output should be the directory listing produced by the Python HTTP server running on your local machine.
-
-## How it works
-
-The above technique works by creating a reverse SSH tunnel between your local machine and the playground VM,
-similar to the one on the following diagram:
-
-::image-box
----
-:src: __static__/ssh-remote-tunnel.png
-:alt: "Exposing a local service to the playground VM using SSH remote tunnel."
----
-
-Exposing a local web server to the playground VM using SSH remote tunnel.
-The Gateway box on the diagram corresponds to the playground VM and the Client box corresponds to your local machine.
-::

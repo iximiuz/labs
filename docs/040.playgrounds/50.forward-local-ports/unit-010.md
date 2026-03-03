@@ -5,12 +5,24 @@ name: forward-local-ports
 kind: unit
 ---
 
-You can securely expose HTTP/TCP/UDP services running in the playground VM to your local machine using the `labctl port-forward` command -
+You can securely expose TCP & UDP services running in the playground VM to your local machine using the `labctl port-forward` command -
 a simplified equivalent of the standard `ssh -L` command:
 
 ```sh
 labctl port-forward PLAYGROUND_ID -L [[LOCAL_HOST:]LOCAL_PORT:][REMOTE_HOST:]REMOTE_PORT
 ```
+
+This capability comes in handy when you need to make a service running in the playground VM accessible for services running on your local machine.
+For example, you can use it to connect a local development server to its upstream dependencies running in the playground, or when you want to connect to a remote database using a local GUI client.
+
+::image-box
+---
+:src: __static__/local-port-forwarding.png
+:alt: "The `labctl port-forward` command starts a foreground process on your machine that forwards all connections to a local port to the corresponding remote address."
+---
+
+The `labctl port-forward` command starts a foreground process on your machine that forwards all connections to a local port to the corresponding remote address.
+::
 
 Below are a few practical examples of how to use the `labctl port-forward -L` command.
 
