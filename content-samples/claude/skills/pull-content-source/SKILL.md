@@ -1,6 +1,6 @@
 ---
 name: pull-content-source
-description: Pulls remote content source files to the local project directory. Use when you need to fetch or update local copies of content from the server.
+description: "Downloads remote challenge, tutorial, course, or skill-path source files from iximiuz Labs to the local project directory via labctl. Use when fetching content, syncing from the server, downloading latest source, or refreshing local copies of markdown and assets."
 argument-hint: <kind> <name>
 ---
 
@@ -20,4 +20,6 @@ Pull remote content of kind `$0` with name `$1` to the local project directory.
      labctl content pull $0 $1 --dir $0s/$1 --force
      ```
 
-The `--force` flag overwrites existing local files without confirmation.
+   The `--force` flag overwrites existing local files without confirmation.
+
+3. **Verify the pull** by checking the command exit code. A non-zero exit code indicates failure (e.g., network error, content not found, or authentication issue).

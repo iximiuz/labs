@@ -1,6 +1,6 @@
 ---
 name: edit-remote-content
-description: Pushes local content edits to the remote server. Supports pushing the entire directory or only specific changed files. Use after editing local content files to sync changes to the server.
+description: "Pushes local content edits for challenges, tutorials, courses, or skill-paths to the iximiuz Labs remote server via labctl. Supports uploading the entire directory or only specific changed files. Use when syncing edits, uploading changes, deploying content updates, or publishing modified markdown and assets to the server."
 argument-hint: <kind> <name>
 ---
 
@@ -21,3 +21,5 @@ Push local edits for content of kind `$0` with name `$1` to the remote server.
    ```sh
    labctl content push $0 $1 --dir <folder> --force
    ```
+
+3. **Verify the push** by checking the command exit code. A non-zero exit code indicates failure (e.g., network error, authentication issue, or missing local files).
