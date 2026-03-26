@@ -504,7 +504,7 @@ kind: error
 While the markdown content of tutorials (or any other forms of content on iximiuz Labs)
 is subject to full authorization checks,
 the static assets are not. This limitation is due to the extensive
-use of CND (e.g., Cloudflare) to deliver static assets with the best
+use of CDN (e.g., Cloudflare) to deliver static assets with the best
 possible performance in all regions of the world.
 
 With some careful URL-construction, files placed in the `__static__`
