@@ -19,6 +19,15 @@ Typical use cases are:
 - Testing webhooks from third-party services (Stripe, GitHub, Slack, etc.) against a local dev server
 - Previewing a local site on a mobile device or from a different network
 
+::image-box
+---
+:src: __static__/expose-local-endpoints.png
+:alt: "The `labctl expose local` command generates a unique URL that can be used to access your local service from anywhere in the world."
+---
+
+The `labctl expose local` command generates a unique URL that can be used to access your local service from anywhere in the world.
+::
+
 ## Usage
 
 The minimal invocation requires only the playground ID and the local address and port:
