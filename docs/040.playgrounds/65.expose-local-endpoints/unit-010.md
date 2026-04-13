@@ -21,7 +21,7 @@ Typical use cases are:
 
 ::image-box
 ---
-:src: __static__/expose-local-endpoints.png
+:src: __static__/expose-local-endpoints-rev2.png
 :alt: "The `labctl expose local` command generates a unique URL that can be used to access your local service from anywhere in the world."
 ---
 
