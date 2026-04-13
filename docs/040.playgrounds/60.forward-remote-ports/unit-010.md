@@ -5,22 +5,11 @@ name: forward-remote-ports
 kind: unit
 ---
 
-You can expose a service running on your local machine to the playground VM using the standard **SSH remote port forwarding**.
-Since the `labctl port-forward -R` flag is not supported yet,
-a workaround via [`labctl ssh-proxy`](/docs/playgrounds/how-to-ssh) and the standard `ssh -R` command should be used.
-
-**Terminal 1:** Start an SSH proxy to the playground VM:
+You can securely expose TCP services running on your local machine to the playground VM using the `labctl port-forward` command -
+a simplified equivalent of the standard `ssh -R` command:
 
 ```sh
-labctl ssh-proxy --address LOCAL_HOST:LOCAL_PORT PLAYGROUND_ID
-```
-
-**Terminal 2:** Forward a remote port using the standard `ssh -R` command:
-
-```sh
-ssh -i ~/.ssh/iximiuz_labs_user \
-  -R [REMOTE_HOST:]REMOTE_PORT:[LOCAL_HOST:]LOCAL_PORT \
-  ssh://laborant@LOCAL_HOST:LOCAL_PORT
+labctl port-forward PLAYGROUND_ID -R [[REMOTE_HOST:]REMOTE_PORT:][LOCAL_HOST:]LOCAL_PORT
 ```
 
 This capability comes in handy when you need to make a service running on your local machine (on intranet) accessible for services running in the remote playground.
@@ -28,14 +17,14 @@ For example, you can use it to expose a Chrome's debugging port (9222) to a codi
 
 ::image-box
 ---
-:src: __static__/remote-port-forwarding.png
-:alt: "Exposing a local service to the playground VM using a reverse SSH tunnel (SSH -R) combined with the `labctl ssh-proxy` helper."
+:src: __static__/remote-port-forwarding-rev2.png
+:alt: "The `labctl port-forward -R` command starts a foreground process on your machine that forwards all connections from a remote port on the playground VM to the corresponding local address."
 ---
 
-Exposing a local service to the playground VM using a reverse SSH tunnel (SSH -R) combined with the `labctl ssh-proxy` helper.
+The `labctl port-forward -R` command starts a foreground process on your machine that forwards all connections from a remote port on the playground VM to the corresponding local address.
 ::
 
-Below is a practical example of how to use remote port forwarding.
+Below is a practical example of how to use the `labctl port-forward -R` command.
 
 ## Exposing a local web server to the playground VM
 
@@ -51,21 +40,17 @@ python3 -m http.server 4000
 PLAY_ID=$(labctl playground start docker)
 ```
 
-3. In a new terminal, start an SSH proxy to the playground:
+3. In a new terminal, forward the playground VM's `0.0.0.0:8080` to your local machine's `127.0.0.1:4000`:
 
 ```sh
-labctl ssh-proxy --address 127.0.0.1:2222 $PLAY_ID
+labctl port-forward $PLAY_ID -R 8080:4000
 ```
 
-4. In yet another terminal, create a remote port forward so that the playground VM's `0.0.0.0:8080` points to your local machine's `127.0.0.1:4000`:
-
-```sh
-ssh -i ~/.ssh/iximiuz_labs_user \
-  -R 0.0.0.0:8080:127.0.0.1:4000 \
-  ssh://laborant@127.0.0.1:2222
+```text
+Forwarding 0.0.0.0:8080 (remote) -> 127.0.0.1:4000 (local)
 ```
 
-5. Verify that the local web server is now accessible **from inside the playground VM**:
+4. Verify that the local web server is now accessible **from inside the playground VM**:
 
 ```sh
 labctl ssh $PLAY_ID -- curl -s http://localhost:8080
