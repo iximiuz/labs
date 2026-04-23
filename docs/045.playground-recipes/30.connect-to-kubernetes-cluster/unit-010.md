@@ -10,6 +10,15 @@ kind: unit
 Playground Kubernetes clusters run inside remote VMs, so `kubectl` on your local machine can't reach the API server directly.
 This recipe shows how to forward the Kubernetes API port and patch the kubeconfig so that your local `kubectl` talks to the cluster as if it were local.
 
+::image-box
+---
+:src: __static__/labctl-kube-proxy.png
+:alt: "The `labctl kube-proxy` command helps you connect to a playground Kubernetes cluster from your local machine using kubectl or any other Kubernetes client that understands the kubeconfig format."
+---
+
+The `labctl kube-proxy` command helps you connect to a playground Kubernetes cluster from your local machine using kubectl or any other Kubernetes client that understands the kubeconfig format.
+::
+
 ## Prerequisites
 
 - [`labctl`](https://github.com/iximiuz/labctl) installed and authenticated
