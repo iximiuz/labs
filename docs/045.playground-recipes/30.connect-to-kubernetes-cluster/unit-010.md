@@ -14,9 +14,44 @@ This recipe shows how to forward the Kubernetes API port and patch the kubeconfi
 
 - [`labctl`](https://github.com/iximiuz/labctl) installed and authenticated
 - `kubectl` installed locally
-- `sed` or [`yq`](https://github.com/mikefarah/yq) for editing the kubeconfig
+- (optional) `sed` or [`yq`](https://github.com/mikefarah/yq) for editing the kubeconfig
 
-## Steps
+## Quick Start
+
+The `labctl kube-proxy` command helps you connect to a playground Kubernetes cluster from your local machine by copying the kubeconfig from the control plane, patching the server address in it to `127.0.0.1`, starting the local port forwarding, and printing the exact `kubectl` command you need to connect to the remote cluster:
+
+```sh
+PLAY_ID=$(labctl playground start k3s)
+```
+
+```sh
+labctl kube-proxy $PLAY_ID
+```
+
+```text
+Downloading kubeconfig from "cplane-01"...
+Patching kubeconfig server address to 127.0.0.1:6443...
+Forwarding 127.0.0.1:6443 (local) -> :6443 (remote)
+Waiting for the Kubernetes API to become accessible...
+
+Kubeconfig saved to:
+  /home/devel/.iximiuz/labctl/plays/69ea00ed4dea8a745f853db2-cplane-01-laborant/kubeconfig
+
+To access the cluster:
+
+  export KUBECONFIG=/home/devel/.iximiuz/labctl/plays/69ea00ed4dea8a745f853db2-cplane-01-laborant/kubeconfig
+  kubectl get all
+
+Or using an explicit flag:
+
+  kubectl --kubeconfig=/home/devel/.iximiuz/labctl/plays/69ea00ed4dea8a745f853db2-cplane-01-laborant/kubeconfig get all
+
+Keeping port forwarding running. Press Ctrl+C to stop.
+```
+
+If you need more control over the process, want to use a different kubeconfig path, or simply want to understand what happens under the hood, read on.
+
+## Manual Steps
 
 **1. Start a Kubernetes playground:**
 
