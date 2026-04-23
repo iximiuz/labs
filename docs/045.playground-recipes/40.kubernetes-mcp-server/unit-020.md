@@ -1,5 +1,5 @@
 ---
-title: Claude Code Locally with a Remote Kubernetes Cluster
+title: Local Claude Code and Kubernetes MCP Server with a Remote Cluster
 
 name: kubernetes-mcp-server-locally
 kind: unit
