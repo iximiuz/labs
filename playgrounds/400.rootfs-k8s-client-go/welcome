@@ -14,7 +14,7 @@ Click on the IDE tab to get started.
 
 Project repository: https://github.com/iximiuz/client-go-examples
 
-Playground VMs are ephemeral and short-lived — terminating a VM purges
+Playground VMs are ephemeral and short-lived - terminating a VM purges
 all data, including images in the private registry. Please, do not use
 playgrounds for processing critical or sensitive information.
 

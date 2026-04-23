@@ -1,7 +1,7 @@
 ---
 title: iximiuz Labs Documentation
 description: |
-  A comprehensive guide to the iximiuz Labs platform — from getting started
+  A comprehensive guide to the iximiuz Labs platform - from getting started
   to authoring content and conducting instructor-led training.
 
 kind: course

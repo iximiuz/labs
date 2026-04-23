@@ -7,7 +7,7 @@ Practical rules and pitfalls learned from authoring challenges. These complement
 - **`flexbox` playground** is the base for custom multi-VM network topologies. Define `networks:` and `machines:` with explicit `network.interfaces` and addresses.
 - **`noSSH: true`** hides a machine from the student's UI but does NOT prevent inter-machine SSH between playground VMs.
 - **Debugging `noSSH` machines:** To inspect examiner tasks on a `noSSH: true` machine, temporarily comment it out (`#noSSH: true`), push, and restart the challenge. This lets you `labctl ssh <playID> --machine <name> -- examinerctl task get <task>` to see task output. Remember to restore `noSSH: true` when done.
-- **curl is pre-installed** on Ubuntu playground VMs — no need for a separate install task.
+- **curl is pre-installed** on Ubuntu playground VMs - no need for a separate install task.
 
 ## Container Image Extraction
 

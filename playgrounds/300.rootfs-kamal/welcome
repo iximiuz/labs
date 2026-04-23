@@ -25,7 +25,7 @@ Find more about Kamal:
 * Documentation https://kamal-deploy.org/
 * GitHub repository https://github.com/basecamp/kamal
 
-Playground VMs are ephemeral and short-lived — terminating a VM purges
+Playground VMs are ephemeral and short-lived - terminating a VM purges
 all data, including images in the private registry. Please, do not use
 playgrounds for processing critical or sensitive information.
 

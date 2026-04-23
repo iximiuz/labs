@@ -15,7 +15,7 @@ Additional services at your disposal:
 * Terminal sharing: Collaborate seamlessly by sharing your terminal session.
 * registry.iximiuz.com: A private hub to push and pull container images.
 
-Playground VMs are ephemeral and short-lived — terminating a VM purges
+Playground VMs are ephemeral and short-lived - terminating a VM purges
 all data, including images in the private registry. Please, do not use
 playgrounds for processing critical or sensitive information.
 
