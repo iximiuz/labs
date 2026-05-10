@@ -284,6 +284,36 @@ tasks:
 challenges:
   docker_101_container_run: {}
   kubernetes_pod_with_faulty_init_sequence: {}
+
+
+# EMBEDDED PLAYGROUNDS
+#
+# Playgrounds to "embed" into the tutorial's text using ::card:: component.
+# See ::card:: components in the markdown below for usage examples.
+# Note: every playground identifier here is exactly the same as
+# in the playground's URL but with - replaced with _ (underscore).
+# You can embed any playgrounds from the https://labs.iximiuz.com/playgrounds catalog.
+playgrounds:
+  docker: {}
+  ubuntu_24_04: {}
+
+
+# EMBEDDED TUTORIALS
+#
+# Tutorials to "embed" into the tutorial's text using ::card:: component.
+# See ::card:: components in the markdown below for usage examples.
+# You can embed any tutorials from the https://labs.iximiuz.com/tutorials catalog.
+tutorials:
+  sample-tutorial: {}
+
+
+# EMBEDDED SKILL PATHS
+#
+# Skill paths to "embed" into the tutorial's text using ::card:: component.
+# See ::card:: components in the markdown below for usage examples.
+# You can embed any skill paths from the https://labs.iximiuz.com/skill-paths catalog.
+skill-paths:
+  sample-skill-path: {}
 ---
 
 This is a self-documenting sample that serves as a guide on how to author **tutorials** on iximiuz Labs.
@@ -392,7 +422,7 @@ However, iximiuz Labs also supports a number of additional fields that can be us
 
 - Specify the tutorial's playground and its customization options.
 - Define _init_, _helper_, and _verification_ tasks to be executed on the playground's VMs.
-- List accompanying the tutorial _challenges_ to later embed them with the challenge card component.
+- List accompanying _challenges_, _tutorials_, _skill paths_, and _playgrounds_ to later embed them as cards in the tutorial's body.
 
 ::details-box
 ---
@@ -444,6 +474,18 @@ tasks:                 # optional
 challenges:            # optional
   challenge-name-1: {}
   challenge-name-2: {}
+
+playgrounds:           # optional
+  playground-name-1: {}
+  playground-name-2: {}
+
+tutorials:             # optional
+  tutorial-name-1: {}
+  tutorial-name-2: {}
+
+skill-paths:           # optional
+  skill-path-name-1: {}
+  skill-path-name-2: {}
 ---
 ```
 ::
@@ -847,7 +889,7 @@ Example:
 Try running `docker run --help` to see available flags for running containers in detached mode.
 ::
 
-### How to Embed Challenges
+### How to Embed Challenge Cards
 
 A _challenge card_ is a rich link to the corresponding challenge that shows a preview of the challenge,
 some metadata, and a button to start the challenge.
@@ -899,6 +941,238 @@ https://labs.iximiuz.com/challenges/docker-101-container-run
 ```
 
 ...the challenge name is `docker-101-container-run`.
+::
+
+### How to Embed Tutorial Cards
+
+A _tutorial card_ is a rich link to another tutorial - useful for cross-linking related material
+or pointing readers to a deeper dive on a specific topic.
+
+Tutorials are embedded into the tutorial using the same `card` component as challenges,
+but with the `:content` attribute pointing into the front matter `tutorials` map:
+
+```markdown
+::card
+---
+# tutorials is an object in the tutorial's front matter
+:content: tutorials.<tutorial-name>
+---
+::
+```
+
+**Before embedding a tutorial, you must list it in the tutorial's Front Matter:**
+
+```yaml
+---
+kind: tutorial
+title: ...
+
+tutorials:
+  <tutorial-name-1>: {}
+  <tutorial-name-2>: {}
+---
+```
+
+By default, a tutorial card floats to the side of the surrounding text (similar to image boxes),
+so the markdown next to the card wraps around it.
+
+Example:
+
+::card
+---
+:content: tutorials.sample-tutorial
+---
+::
+
+Some text next to the tutorial card. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut purus eget sapien. Nulla facilisi.
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut purus eget sapien. Nulla facilisi.
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut purus eget sapien. Nulla facilisi.
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut purus eget sapien. Nulla facilisi.
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut purus eget sapien. Nulla facilisi.
+
+::remark-box
+**A tutorial name is the last segment of the tutorial's URL.** For example, for a tutorial located at the following URL:
+
+```text
+https://labs.iximiuz.com/tutorials/sample-tutorial
+```
+
+...the tutorial name is `sample-tutorial`.
+::
+
+### How to Embed Skill Path Cards
+
+A _skill path card_ is a rich link to a multi-step skill path - a great way to point readers
+to a structured learning track that builds on the topic of the tutorial.
+
+Skill paths are embedded with the `card` component and the `:content` attribute pointing into the
+front matter `skill-paths` map:
+
+```markdown
+::card
+---
+# skill-paths is an object in the tutorial's front matter
+:content: skill-paths.<skill-path-name>
+---
+::
+```
+
+**Before embedding a skill path, you must list it in the tutorial's Front Matter:**
+
+```yaml
+---
+kind: tutorial
+title: ...
+
+skill-paths:
+  <skill-path-name-1>: {}
+  <skill-path-name-2>: {}
+---
+```
+
+By default, a skill path card floats to the side of the surrounding text (similar to image boxes),
+so the markdown next to the card wraps around it.
+
+Example:
+
+::card
+---
+:content: skill-paths.sample-skill-path
+---
+::
+
+Some text next to the skill path card. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut purus eget sapien. Nulla facilisi.
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut purus eget sapien. Nulla facilisi.
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut purus eget sapien. Nulla facilisi.
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut purus eget sapien. Nulla facilisi.
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut purus eget sapien. Nulla facilisi.
+
+::remark-box
+**A skill path name is the last segment of the skill path's URL.** For example, for a skill path located at the following URL:
+
+```text
+https://labs.iximiuz.com/skill-paths/sample-skill-path
+```
+
+...the skill path name is `sample-skill-path`.
+::
+
+### How to Embed Playground Cards
+
+A _playground card_ is a rich link to a standalone playground that shows a preview of the playground,
+some metadata, and a button to start it.
+Authors can embed any playgrounds listed in the public [playgrounds catalog](/playgrounds) or their own [custom playgrounds](/playgrounds?filter=my-custom).
+
+Playgrounds are embedded into the tutorial using the same `card` component as challenges,
+but with the `:playground` attribute instead of `:challenge`:
+
+```markdown
+::card
+---
+# playgrounds is an object in the tutorial's front matter
+:playground: playgrounds.<playground-name>
+---
+::
+```
+
+**Before embedding a playground, you must list it in the tutorial's Front Matter:**
+
+```yaml
+---
+kind: tutorial
+title: ...
+
+playgrounds:
+  <playground-name-1>: {}
+  <playground-name-2>: {}
+---
+```
+
+By default, a playground card floats to the side of the surrounding text (similar to image boxes),
+so the markdown next to the card wraps around it.
+
+Examples:
+
+::card
+---
+:playground: playgrounds.docker
+---
+::
+
+Some text next to the playground card. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut purus eget sapien. Nulla facilisi.
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut purus eget sapien. Nulla facilisi.
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut purus eget sapien. Nulla facilisi.
+
+::card
+---
+:playground: playgrounds.ubuntu_24_04
+---
+::
+
+More text next to the playground card. Duis aute irure dolor in reprehenderit in voluptate velit
+esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt
+in culpa qui officia deserunt mollit anim id est laborum.
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut purus eget sapien. Nulla facilisi.
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut purus eget sapien. Nulla facilisi.
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut purus eget sapien. Nulla facilisi.
+
+::remark-box
+**A playground name is the last segment of the playground's URL.** For example, for a playground located at the following URL:
+
+```text
+https://labs.iximiuz.com/playgrounds/ubuntu-24-04
+```
+
+...the playground name is `ubuntu-24-04`.
+::
+
+### How to Embed a Grid of Cards
+
+When you want to show a collection of related challenges, tutorials, skill paths, or playgrounds side by side,
+use the `grid` component. It arranges its items in a responsive grid where all cards in a row share the same height.
+
+```markdown
+::grid
+---
+items:
+  - challenge: challenges.<challenge-name>
+  - content: tutorials.<tutorial-name>
+  - content: skill-paths.<skill-path-name>
+  - playground: playgrounds.<playground-name>
+---
+::
+```
+
+Each item must reference an entry already declared in the front matter under the corresponding key
+(`challenges`, `tutorials`, `skill-paths`, `playgrounds`, etc.).
+
+Example:
+
+::grid
+---
+items:
+  - challenge: challenges.docker-101-container-run
+  - challenge: challenges.kubernetes-pod-with-faulty-init-sequence
+  - content: tutorials.sample-tutorial
+  - content: skill-paths.sample-skill-path
+  - playground: playgrounds.docker
+  - playground: playgrounds.ubuntu-24-04
+---
 ::
 
 
