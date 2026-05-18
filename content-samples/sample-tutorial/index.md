@@ -1378,26 +1378,34 @@ Run this command from a :tab{text='new terminal' machine='cplane-01' :new=true}.
 
 ### Exposing Ports Inline
 
-You can **dynamically expose ports from the playground** using the inline `exposed-port-inline` component.
-This creates a clickable link that automatically opens the specified port when clicked.
-Here is an example:
+You can [automatically expose HTTP/HTTPS ports from the playground](/docs/playgrounds/expose-http-ports) using the `http-port` component.
+This creates a clickable link that opens a new browser tab with the web application running in the playground on the specified port.
+This is particularly helpful when you want users to access web applications or services running in the playground without having them go through the port exposure UI.
+
+Here are some examples:
 
 ```markdown
-:exposed-port-inline{text='click here to expose the port' port=9090}
+# Simple case:
+:http-port{text='click here to expose the port' port=9090}
 
 # For a specific machine:
-:exposed-port-inline{text='open app on dev-machine' port=8080 machine='dev-machine'}
+:http-port{text='open app on dev-machine' port=8080 machine='dev-machine'}
 
 # For public access:
-:exposed-port-inline{text='open public dashboard' port=3000 public=true}
+:http-port{text='open public dashboard' port=3000 public=true}
+
+# For TLS-enabled application:
+:http-port{text='open public dashboard' port=6443 https=true}
 ```
 
 And here is how it looks when rendered:
-Access the service via :exposed-port-inline{text='Nginx on port 30080' port=30080 machine='node-01'}...
-Then open the :exposed-port-inline{text='development server' port=8080 machine='dev-machine'} to see your app.
+
+Access the service via :http-port{text='Nginx on port 30080' port=30080 machine='node-01'}...
+Then open the :http-port{text='development server' port=8080 machine='dev-machine'} to see your app.
 
 ::remark-box
-💡 This is particularly useful when you want users to access web applications or services running in the playground without having to manually configure port forwarding.
+The above example assumes that the Nginx service is running on the `node-01` machine in the playground,
+its port 80 is published to the VM's `0.0.0.0:30080` address, and then forwarded to the `dev-machine` machine as `8080`.
 ::
 
 ### Playground Container Registry
