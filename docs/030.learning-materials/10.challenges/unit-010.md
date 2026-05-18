@@ -75,7 +75,12 @@ You are encouraged to:
 - Break things and recover from mistakes
 - Compare your solution with the editorial walkthrough afterward
 
+::remark-box
+---
+:kind: warning
+---
 What you should avoid is delegating the whole task to an autonomous coding agent and watching it solve the problem for you. That may complete the Challenge, but it defeats the purpose. The learning happens in the doing.
+::
 
 ## When to use Challenges
 
@@ -85,7 +90,7 @@ Challenges are especially useful when you want to:
 - Build confidence with command-line tools
 - Prepare for real operational tasks
 - Practice debugging and troubleshooting
-- Reinforce concepts from Tutorials, Courses, Skill Paths, or Roadmaps
+- Reinforce concepts from [Tutorials](/docs/learning-materials/tutorials) and [Courses](/docs/learning-materials/courses)
 - Discover gaps in your understanding
 
 If a Challenge feels too hard, that is usually a signal to step back and study the related material. Many Challenges link to Tutorials or Course lessons that explain the underlying concepts in more depth.
