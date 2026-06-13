@@ -20,7 +20,7 @@ This includes:
 - [Skill Paths](/new/skill-path)
 - [Playgrounds](/new/playground)
 
-Once created, the content can be shared either publicly or with a limited set of users via access control settings.
+Once created, the content can be shared either publicly or with a limited set of users via [access control settings](/docs/content-authoring/access-control).
 
 ::remark-box
 ---
@@ -34,7 +34,7 @@ the iximiuz Labs team reserves the right to choose which content will be listed 
 
 ## How to monetize content published on iximiuz Labs?
 
-[Content monetization](https://labs.iximiuz.com/author/dashboard#monetization) is supported via the **Independent Authors** program.
+[Content monetization](/author/dashboard#monetization) is supported via the **Independent Authors** program.
 To qualify, you need to publish at least 3 content items as a Community Author that pass a quality review by the iximiuz Labs team.
 
 ## How to get started authoring content on iximiuz Labs?

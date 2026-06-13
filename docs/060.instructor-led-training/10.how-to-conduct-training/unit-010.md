@@ -14,7 +14,7 @@ A proper documentation is coming soon, but here is the top-level idea:
 - Once enrolled, students show up in the instructor's dashboard where the instructor can see their progress (what tutorials, challenges, courses started, which tasks passed, etc.).
 - The fact of training enrolment assigns a special role to each enrolled user `student:<training-name>`,
 which then can be used in instructor's "private" learning materials (like in the above Harbour Space university example -
-it's possible to see the training's landing page but not its program and the linked materials).
+it's possible to see the training's landing page but not its program and the linked materials). See [How to Restrict Training Materials to Your Students](/docs/instructor-led-training/access-control) for more details.
 
 ::highlight
 I.e., a training serves as both a "container" for the content and an access control means.
