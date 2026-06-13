@@ -8,14 +8,14 @@ kind: unit
 An important part of publishing on iximiuz Labs is deciding **who can see and use your materials**.
 This page is a practical guide to configuring access control (RBAC) for the content you create.
 
-Every piece of content you author - a [tutorial](/docs/learning-materials/tutorials), [challenge](/docs/learning-materials/challenges),
-[course](/docs/learning-materials/courses), [skill path](/docs/learning-materials/skill-paths), [roadmap](/docs/learning-materials/roadmaps), or [playground](/docs/playgrounds) -
+Every piece of content you author - a [Tutorial](/docs/learning-materials/tutorials), [Challenge](/docs/learning-materials/challenges),
+[Course](/docs/learning-materials/courses), [Skill Path](/docs/learning-materials/skill-paths), [Roadmap](/docs/learning-materials/roadmaps), or [Playground](/docs/playgrounds/what-are-playgrounds) -
 is governed by the same access control model. However, the particular actions on content vary from one type to another.
 
 ::remark-box
 💡 This page focuses on individual content access. If you want to gate materials behind a
 **training** (so that only your enrolled students can use them), see the dedicated guide on
-[access control for instructor-led training](/docs/instructor-led-training/access-control).
+[access control for instructor-led training](/docs/instructor-led-training/training-access-control).
 ::
 
 
@@ -179,7 +179,7 @@ who enrolls in (and is optionally approved for) that training.
 | `canStart`   | `[student:my-awesome-course-2026]` |
 
 This is the most powerful and flexible option, since enrollment (and revocation) is managed for you.
-It's covered in detail in the [instructor-led training access guide](/docs/instructor-led-training/access-control).
+It's covered in detail in the [instructor-led training access guide](/docs/instructor-led-training/training-access-control).
 
 
 ## A Note on Unprotected Static Assets

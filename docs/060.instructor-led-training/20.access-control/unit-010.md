@@ -1,7 +1,7 @@
 ---
 title: How to Restrict Training Materials to Your Students
 
-name: access-control
+name: training-access-control
 kind: unit
 ---
 

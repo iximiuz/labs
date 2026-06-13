@@ -26,7 +26,7 @@ Between (or within) Lessons, a Course points you at Challenges - bite-sized prob
 :alt: "Course example: ​Computer Networking Fundamentals For Developers​"
 ---
 
-Course example: [​Computer Networking Fundamentals For Developers​](/courses/computer-networking-fundamentals-for-developers)
+Course example: [​Computer Networking Fundamentals For Developers​](/courses/computer-networking-fundamentals)
 ::
 
 ## Lessons and Challenges
