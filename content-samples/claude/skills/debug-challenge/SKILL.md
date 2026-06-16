@@ -5,7 +5,18 @@ argument-hint: <challenge-name>
 disable-model-invocation: true
 ---
 
-Debug the challenge `$0`. Follow these steps in order:
+Debug the challenge `$0`. Follow these steps in order.
+
+> **Debugging why a *solution* doesn't solve?** Prefer the CI helper path (the
+> `solve-challenge` skill / `tests/challenges/main.go --skip-auth`) instead of the manual
+> flow below. It starts its own playground and, **while it runs**, you can point ordinary
+> `labctl` commands at that playground (`labctl playground tasks <id> -o yaml`,
+> `labctl ssh <id> -- <diag>`). Most importantly it writes a per-solution **artifacts
+> directory** (path printed at the start of the run) whose files are appended *dynamically
+> during the attempt* — `chunk-NN.*.log` (per-chunk output), `tasks-*.txt`
+> (`labctl playground tasks -o yaml` snapshots every 15s), and `journal-<machine>.examiner.log`.
+> Analyzing those artifacts is the fastest way to find the failing chunk or task. The manual
+> flow below is for debugging the challenge *environment/tasks* directly.
 
 ## 1. Start the challenge in the background
 
@@ -24,19 +35,21 @@ playground ID corresponding to this challenge. You'll need this ID for all subse
 
 ## 3. Inspect examiner tasks
 
-Use the `list-playground-tasks` skill to list all tasks:
+Get the overview via the **API (no SSH tunnel)** - poll this in a loop while init
+tasks are still running:
 
 ```sh
-labctl ssh <playID> -- examinerctl task ls
+labctl playground tasks <playID> -o yaml
 ```
 
-Then use the `get-playground-task` skill to inspect individual tasks that are failing or hanging:
+**Tasks are edge-activated and never regress:** once a task shows `completed`
+(`40`) it stays there for the life of the playground, so a single `completed`
+observation is authoritative.
 
-```sh
-labctl ssh <playID> -- examinerctl task get <task-name>
-```
-
-This shows the task status and stdout/stderr from the last execution.
+**SSH discipline:** run `labctl ssh` calls foreground and one at a time - never in a
+backgrounded retry loop. Orphaned `labctl ssh` children exhaust the tunnel pool and
+every later ssh then fails with `StartTunnel(): retry after 2562047h47m16s`. If you
+hit that, `pkill -9 -f 'labctl ssh'` and retry (see `run-playground-command`).
 
 ## 4. Troubleshoot over SSH
 
@@ -50,9 +63,11 @@ labctl ssh <playID> -- <diagnostic-command>
 Common diagnostics: checking file contents, running scripts manually, inspecting
 service status, reviewing logs, testing network connectivity, etc.
 
-**Tip:** If the machine you need to inspect has `noSSH: true`, you won't be able to
-`labctl ssh` into it. Temporarily comment out the directive (`#noSSH: true`), push the
-change, and restart the challenge. Remember to restore it when done debugging.
+**Tip:** If the machine you need to inspect has `noSSH: true`, you can still read its
+task status and last-run output via `labctl playground tasks <playID> -o yaml` (the API
+covers hidden machines too). Only when you need to run *live diagnostic commands* on
+that machine must you temporarily comment out the directive (`#noSSH: true`), push, and
+restart the challenge. Remember to restore it when done debugging.
 
 ## 5. Fix the challenge source
 
@@ -73,9 +88,11 @@ First, push the changes using the `edit-remote-content` skill:
 labctl content push challenge $0 --dir <folder> --force
 ```
 
-Then stop the current playground and start a fresh one:
+Then stop the current attempt and start a fresh one (the stop is required - a
+running attempt keeps serving the old content):
 
 ```sh
+labctl challenge stop $0
 labctl challenge start $0 --no-open --no-ssh
 ```
 

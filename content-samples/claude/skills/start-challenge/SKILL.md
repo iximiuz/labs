@@ -15,6 +15,6 @@ labctl challenge start $0 --no-open --no-ssh
 The `--no-open` flag prevents opening the browser.
 The `--no-ssh` flag prevents starting an interactive SSH session.
 
-Since this command may take a long time (it waits for all init tasks to complete),
-run it in the background and immediately use the `list-running-playgrounds` skill
-to find the playground ID for further operations.
+This command may take a long time (it waits for all init tasks to complete).
+Once the challenge is started, the command will print the corresponding playground ID,
+which you can use for further operations (e.g. `labctl ssh <id> -- <diagnostic>`).

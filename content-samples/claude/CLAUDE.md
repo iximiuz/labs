@@ -45,7 +45,9 @@ Playgrounds can be used as is or additionally customized by defining `init` task
 
 ## Tasks
 
-Tasks are shell scripts defined in the YAML frontmatter of `index.md` that are executed by the **examiner** - an agent running on the playground VM. Tasks serve two purposes: preparing the environment and verifying the user's progress. Each task has a `run:` field with a shell script where exit code 0 means success and non-zero means failure.
+Tasks are shell scripts defined in the YAML frontmatter of `index.md` that are executed by the **examiner** - a resident agent running on the playground VM. Tasks serve two purposes: preparing the environment and verifying the user's progress. Each task has a `run:` field with a shell script where exit code 0 means success and non-zero means failure.
+
+Tasks are **edge-activated** - they (re)run until either complete or fail, but once a task reaches its terminal state, it will never run again (even if the underlying world state changes, and the original condition that made the task finish no longer holds). A task's status **never regresses**: the numerical status value can only go up, and once it reaches a terminal state - `completed` (`40`) or `failed` (`35`) - it stays there for the life of the playground. A passed task cannot later flip back or fail, so a single `completed` observation is authoritative.
 
 ### Init Tasks
 
@@ -58,6 +60,39 @@ Verification tasks (no `init` field) check whether the user has completed a chal
 ### Task Dependencies and Data Flow
 
 Tasks can depend on other tasks via `needs:` and pass data between each other via `env:` with the `x(.needs.<task>.stdout)` syntax. This allows building multi-step verification chains.
+
+### User Input Tasks
+
+User input tasks are regular verification tasks that require the user to enter some data in a form (via the corresponding `::user-input-task` component). The task's `run`, `hintcheck:`, and `failcheck:` blocks can access the user's input via the `x(.input)` syntax. Alternatively, the task can have a `destination:` field that points to a file where the user's input will be saved, but the `input` syntax should be preferred over the `destination` field. Example of a user input task:
+
+```markdown
+---
+tasks:
+  verify_status_after_create:
+    run: |
+      PROVIDED="x(.input)"
+      if [ -z "${PROVIDED}" ]; then
+        echo "Container status is empty"
+        exit 1
+      fi
+      echo "${PROVIDED}"
+---
+
+Some content goes here...
+
+::user-input-task
+---
+:tasks: tasks
+:name: verify_status_after_create
+:validateRegex: ^[a-zA-Z]+$
+---
+#active
+Waiting for the container status to be pasted...
+
+#completed
+Nice! You've identified the container status 🎉
+::
+```
 
 ### Task Sizing Guidelines
 
@@ -82,7 +117,7 @@ Benefits:
 
 ### Hint and Failure Checks
 
-Verification tasks can include `hintcheck:` and `failcheck:` scripts that run when the task fails. These provide context-aware feedback to help the user understand what went wrong.
+Verification tasks can include `hintcheck:` and `failcheck:` scripts that run when the task fails. These provide context-aware feedback to help the user understand what went wrong. A `hintcheck:` script SHOULD exit with code 0 regardless of its output. A `failcheck:` script MUST exit with a non-zero code if the task should fail (i.e., when its output is not empty) and with code 0 if the task should succeed.
 
 ## labctl CLI
 
@@ -104,9 +139,11 @@ A local CLI called [`labctl`](https://github.com/iximiuz/labctl) is used to inte
 - `list-available-playgrounds` - browse the playground catalog
 - `start-playground <name>` - start a playground and get its ID
 - `list-running-playgrounds` - list active playground sessions
-- `stop-playground <id>` - stop a running playground
+- `stop-playground <id>` - terminate a running playground
 - `run-playground-command <id> [command]` - execute commands on a playground VM
 - `ssh-into-playground <id>` - open an interactive SSH session (user-only)
+
+**Terminating playgrounds: ALWAYS `labctl playground destroy`, NEVER `labctl playground stop`.** `stop` does not terminate the playground - it suspends it for a later resume, leaving the session lingering around. Ephemeral playgrounds (everything started for authoring/testing) must be destroyed. For challenge attempts, `labctl challenge stop <name>` is the right command (it tears down the attempt's playground too); if it fails, force it with `labctl playground destroy <playID>`.
 
 ### Challenge Lifecycle
 
