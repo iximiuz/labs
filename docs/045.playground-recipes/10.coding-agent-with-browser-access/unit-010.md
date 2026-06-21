@@ -130,7 +130,7 @@ Then tell Claude Code to open the application in the local browser using the gen
 
 ## Editing the remote codebase locally
 
-If you prefer to browse and edit the project in your local IDE rather than over SSH, open the playground's workspace with [`labctl ide`](/docs/cli/labctl#labctl-ide):
+If you prefer to browse and edit the project in your local IDE rather than over SSH, open the playground's workspace with [`labctl ide`](/docs/playgrounds/how-to-use-playgrounds#ide):
 
 ```sh
 labctl ide code $PLAY_ID --workdir path/to/source
