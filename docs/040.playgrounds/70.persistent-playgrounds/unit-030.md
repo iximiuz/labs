@@ -10,7 +10,7 @@ This is where another capability of persistent playgrounds comes in handy -
 [saving a stopped run as a custom playground](https://newsletter.iximiuz.com/posts/new-ways-to-experiment-on-iximiuz-labs-instant-clones-and-click-ops-playground-creation).
 
 Cloning a run ad hoc creates two independently mutable playground runs.
-But saving a stopped run as a [custom playground](/docs/playgrounds/custom-playgrounds)
+But saving a stopped run as a [custom playground](/docs/custom-playgrounds/building-blocks)
 creates a read-only template that can then be used to branch out as many mutable runs off it as needed.
 And as with any playgrounds, you can also share it with others or embed it in tutorials, challenges, or course lessons.
 

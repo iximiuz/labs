@@ -94,6 +94,6 @@ With multi-VM, multi-network, multi-disk playgrounds, persistent storage, clonin
 - A demo environment for blog posts or talks
 - A reproducible debugging setup you can snapshot and share
 
-[You can create your own custom playgrounds](/docs/playgrounds/custom-playgrounds),
+[You can create your own custom playgrounds](/docs/custom-playgrounds/building-blocks),
 wire complex network topologies, attach extra drives,
 switch kernels, or even bake and use your own rootfs images. That's where the real fun and growth happens.

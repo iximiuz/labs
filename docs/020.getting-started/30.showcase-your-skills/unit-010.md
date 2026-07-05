@@ -47,7 +47,7 @@ which makes them **a perfect shareable unit of experience**.
 Now, instead of including a link to a GitHub repo with a bunch of Terraform files (which may or may not be ~~AI slop~~ working),
 you can include a link to an interactive environment that the hiring team can actually start and explore (and get impressed by your Linux, Docker, or Kubernetes talent).
 
-Getting started with [custom playgrounds](/docs/playgrounds/custom-playgrounds) is straightforward:
+Getting started with [custom playgrounds](/docs/custom-playgrounds/building-blocks) is straightforward:
 fill out the name and (optionally) description on [labs.iximiuz.com/new/playground](/new/playground) and click **Create**.
 
 Once the playground is created, you can use the UI constructor to add or remove virtual machines, deploy custom init scripts, set up multiple networks, or add extra drives:
@@ -83,12 +83,12 @@ categories:
   - linux
 playground:
   accessControl:
-  canList:
-    - owner
-  canRead:
-    - owner
-  canStart:
-    - owner
+    canList:
+      - owner
+    canRead:
+      - owner
+    canStart:
+      - owner
   machines:
   - name: vm-1
     users:
@@ -98,11 +98,11 @@ playground:
     - source: ubuntu-24-04
       mount: /
     network:
-    interfaces:
-      - network: local
+      interfaces:
+        - network: local
     resources:
-    cpuCount: 2
-    ramSize: 4G
+      cpuCount: 2
+      ramSize: 4G
 EOF
 ```
 ::
