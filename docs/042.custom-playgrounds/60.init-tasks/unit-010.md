@@ -60,22 +60,34 @@ Field by field:
 - `machine` - which VM the task runs on.
 - `user` - the user to run the script as; defaults to `root`.
 - `run` - the script itself (executed with `bash`).
-- `needs` - names of tasks that must complete first; dependencies form a graph, so you can fan out and join provisioning steps across machines.
+- `needs` - names of tasks that must complete first.
 - `timeout_seconds` - **defaults to 60 seconds**; set it generously for anything that touches the network or a package manager.
 
-::remark-box
----
-:kind: warning
----
+## Execution order
 
-⚠️ A failing or timed-out init task keeps the playground stuck on the loading screen. Test your scripts by starting the playground and watching the task progress - `labctl playground tasks <play-id>` shows the status of each task from the command line:
+Tasks with no `needs` start concurrently as soon as their machine boots; `needs` chains them into a dependency graph.
+Since every task names its target machine, the graph can span the whole playground -
+a task on one machine can wait for provisioning on another, which is how you express "start the app server only after the database VM is seeded".
+
+Two practical gotchas:
+
+- Tasks run as `root` unless `user` says otherwise. If a task prepares files for the interactive user (cloning a repo into `/home/laborant`, for example), set `user: laborant` - or you'll leave root-owned files in their home directory.
+- Init tasks execute once per playground instance during its initialization; they are not re-run after in-session machine reboots.
+
+## Debugging init tasks
+
+A failing or timed-out init task keeps the playground stuck on the loading screen,
+so test your scripts by starting the playground and watching the task progress.
+`labctl playground tasks <play-id>` shows the status of each task from the command line:
 
 ```text
 NAME                 MACHINE  STATUS     INIT  HELPER
 init_fetch_app       dev-01   completed  true  false
-init_start_services  dev-01   completed  true  false
+init_start_services  dev-01   running    true  false
 ```
-::
+
+While the tasks are still running, you can already SSH into the machines (`labctl ssh <play-id> -m <machine>`)
+and inspect the environment - handy for figuring out why a script misbehaves.
 
 ## Parameterized playgrounds
 
@@ -107,3 +119,5 @@ labctl playground start web-dev-lab-<suffix> -i k8s_flavor=kubeadm
 ```
 
 Tasks whose conditions don't match the chosen values are simply skipped (they won't even appear in the task list).
+Combined with `options`, `default`, and free-form values (validated by an optional `validationRegex`),
+init conditions let one playground serve several scenarios - different Kubernetes flavors, tool versions, or difficulty levels.

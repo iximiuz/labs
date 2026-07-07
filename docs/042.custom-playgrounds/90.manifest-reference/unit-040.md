@@ -5,7 +5,7 @@ name: tabs
 kind: unit
 ---
 
-`playground.tabs` defines the panes of the playground page (1-10 entries). Omitting it yields the defaults (an IDE tab for most base playgrounds + a terminal per SSH-enabled machine, plus the Kubernetes Explorer for Kubernetes playgrounds); defining it replaces the defaults entirely:
+`playground.tabs` defines the panes of the playground page (1-10 entries (see [the UI tabs lesson](/docs/custom-playgrounds/ui-tabs) for more). Omitting it yields the defaults (an IDE tab for most base playgrounds + a terminal per SSH-enabled machine, plus the Kubernetes Explorer for Kubernetes playgrounds); defining it replaces the defaults entirely:
 
 ```yaml
   tabs:
@@ -28,6 +28,8 @@ kind: unit
 | `name` | string | all | Tab label; required for `http-port` and `web-page`. |
 | `number` | int | `http-port` | The port to render; the app must listen on the machine's main interface or `0.0.0.0` (see [Expose HTTP Ports](/docs/playgrounds/expose-http-ports)). |
 | `tls` | bool | `http-port` | Set `true` when the in-VM server speaks HTTPS. |
+| `hostRewrite` | string | `http-port` | Rewrite the `Host` header for servers that validate it. |
+| `pathRewrite` | string | `http-port` | Rewrite the URL path when the app isn't served from `/`. |
 | `url` | string | `web-page` | The external page to embed. |
 | `id` | string | all | Auto-generated (`<kind>-<machine>`); set explicitly only to disambiguate multiple tabs of the same kind on one machine. |
 

@@ -6,7 +6,7 @@ kind: unit
 ---
 
 `playground.initTasks` is a map of named provisioning tasks executed inside the machines during startup
-(see [the init tasks lesson](/docs/custom-playgrounds/init-tasks-and-tabs#init-tasks) for a guided tour):
+(see [the init tasks lesson](/docs/custom-playgrounds/init-tasks) for more):
 
 ```yaml
   initTasks:

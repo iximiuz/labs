@@ -159,7 +159,7 @@ labctl playground start my-first-playground-fda7ebc1
 ```
 
 While the playground is starting, a loading screen shows the progress of the init tasks - the environment becomes available only after all of them complete
-(more on init tasks in [Init Tasks, Startup Files, and Tabs](/docs/custom-playgrounds/init-tasks-and-tabs)).
+(more on init tasks in [Init Tasks](/docs/custom-playgrounds/init-tasks)).
 
 ::remark-box
 ---
