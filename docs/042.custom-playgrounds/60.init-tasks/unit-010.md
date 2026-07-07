@@ -121,3 +121,49 @@ labctl playground start web-dev-lab-<suffix> -i k8s_flavor=kubeadm
 Tasks whose conditions don't match the chosen values are simply skipped (they won't even appear in the task list).
 Combined with `options`, `default`, and free-form values (validated by an optional `validationRegex`),
 init conditions let one playground serve several scenarios - different Kubernetes flavors, tool versions, or difficulty levels.
+
+A good real-world example is the [Kubernetes Cluster](https://labs.iximiuz.com/playgrounds/k8s-omni) playground (`k8s-omni`) -
+a multi-node kubeadm cluster where both the container runtime and the networking plugin are chosen at start time:
+
+```yaml
+  initConditions:
+    values:
+      - key: Container runtime
+        default: containerd
+        options:
+          - containerd
+          - cri-o
+      - key: Networking plugin
+        default: flannel
+        nullable: true  # can be left unset - the cluster starts with no CNI plugin installed
+        options:
+          - calico
+          - cilium
+          - flannel
+          - static
+```
+
+Every runtime- and plugin-specific provisioning step (installing containerd or CRI-O, applying the Cilium or Flannel manifests,
+configuring static routes, and so on) is a separate init task guarded by the matching condition:
+
+```yaml
+    init_cplane_10_cri_o_install:
+      init: true
+      machine: cplane-01
+      conditions:
+        - key: Container runtime
+          value: cri-o
+      run: |
+        apt-get install -y cri-o podman
+        systemctl enable --now crio
+```
+
+This is the real power of parameterized playgrounds: instead of maintaining a dozen near-identical copies,
+a single manifest covers the whole matrix of container runtimes × networking plugins -
+including a cluster with no CNI at all, for practicing networking setup from scratch (a classic CKA exercise).
+
+The `k8s-omni` manifest is public, so you can study the complete technique with:
+
+```sh
+labctl playground manifest k8s-omni
+```
