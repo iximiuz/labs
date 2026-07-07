@@ -71,7 +71,8 @@ labctl playground create routing-lab --base flexbox -f manifest.yaml
 In this playground, `web-01` is **multi-homed**: its `eth0` lives on the `frontend` network and `eth1` on `backend`, so it can reach both the internet and the database:
 
 ```sh
-labctl ssh <play-id> -m web-01 -- ip -brief addr
+PLAY_ID=$(labctl playground start routing-lab-...)
+labctl ssh $PLAY_ID -m web-01 -- ip -brief addr
 ```
 
 ```text

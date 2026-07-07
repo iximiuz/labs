@@ -137,6 +137,10 @@ playground:
         interfaces:
           - network: local
   tabs:
+    - kind: http-port
+      machine: dev-01
+      name: nginx
+      number: 80
     - kind: terminal
       machine: dev-01
   initTasks:
@@ -149,6 +153,13 @@ playground:
         apt-get update
         apt-get install -y nginx
         systemctl enable --now nginx
+  accessControl:
+    canList:
+      - owner
+    canRead:
+      - owner
+    canStart:
+      - owner
 ```
 
 Apply the changes and take the playground for a spin:

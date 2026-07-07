@@ -80,7 +80,8 @@ Machines are also resolvable by their network-qualified names (e.g., `server-01.
 From your own terminal, pick the machine to enter with the `-m` flag:
 
 ```sh
-labctl ssh <play-id> -m server-01
+PLAY_ID=$(labctl playground start client-server-lab-...)
+labctl ssh $PLAY_ID -m server-01
 ```
 
 For custom subnets, static IPs, and isolated network segments, see [Multi-Network Playgrounds](/docs/custom-playgrounds/multi-network-playgrounds).
