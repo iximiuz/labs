@@ -121,3 +121,6 @@ RUN --mount=type=bind,source=scripts,target=/tmp/scripts /tmp/scripts/get-fzf.sh
 RUN --mount=type=bind,source=scripts,target=/tmp/scripts /tmp/scripts/customize-bashrc.sh
 RUN --mount=type=bind,source=scripts,target=/tmp/scripts USER=$LAB_USER /tmp/scripts/customize-git.sh
 RUN --mount=type=bind,source=scripts,target=/tmp/scripts /tmp/scripts/customize-vimrc.sh
+
+# System-wide user tools - built as $LAB_USER
+RUN --mount=type=bind,source=scripts,target=/tmp/scripts /tmp/scripts/get-yay.sh
