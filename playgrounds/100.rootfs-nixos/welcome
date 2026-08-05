@@ -1,0 +1,25 @@
+Welcome to iximiuz Labs' NixOS Playground! 🚀
+
+This is a NixOS VM, curated with tools for efficient learning and
+hands-on experimenting:
+
+- nix (flakes and nix-command enabled): Install anything from nixpkgs.
+- vim, fzf, ripgrep: Command-line file editing and searching.
+- jq, yq: Powerful JSON and YAML processors.
+- curl, socat: A handy networking toolkit.
+
+Try it out:
+
+  $ nix run nixpkgs#hello
+  $ nix shell nixpkgs#cowsay
+  $ sudo nixos-rebuild switch  # after editing /etc/nixos/configuration.nix
+
+Additional services at your disposal:
+
+* Port publishing: Showcase your app with its own public URL.
+* Terminal sharing: Collaborate seamlessly by sharing your terminal session.
+* registry.iximiuz.com: A private hub to push and pull container images.
+
+Playground VMs are ephemeral and short-lived — terminating a VM purges
+all data, including images in the private registry. Please, do not use
+playgrounds for processing critical or sensitive information.

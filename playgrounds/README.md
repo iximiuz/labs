@@ -49,6 +49,7 @@ make base-3xx  # Development environments
 | `debian-testing`      | Debian testing release with typical sysadmin tools             |
 | `fedora`              | Latest Fedora release with typical sysadmin tools              |
 | `kali-linux`          | Kali Linux for security testing with typical sysadmin tools    |
+| `nixos`               | NixOS with typical sysadmin tools (declarative configuration)  |
 | `opensuse-tumbleweed` | Latest openSUSE tumbleweed with typical sysadmin tools         |
 | `rockylinux`          | Rocky Linux enterprise environment with typical sysadmin tools |
 | `ubuntu-22-04`        | Ubuntu 22.04 LTS with typical sysadmin tools                   |

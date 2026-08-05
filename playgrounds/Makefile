@@ -85,6 +85,7 @@ build-rootfs-%: examiner examinerctl
 		--build-arg KAMAL_VERSION=2.7.0 \
 		--build-arg NERDCTL_VERSION=2.1.2 \
 		--build-arg NERDCTL_CNI_VERSION=1.7.1 \
+		--build-arg NIXOS_VERSION=25.11 \
 		--build-arg NVM_VERSION=0.40.3 \
 		--build-arg PYTHON_VERSION=3.13 \
 		--build-arg ROCKYLINUX_VERSION=9 \
