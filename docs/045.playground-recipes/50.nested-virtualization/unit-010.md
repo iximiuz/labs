@@ -5,6 +5,18 @@ name: nested-virtualization-in-playground
 kind: unit
 ---
 
+::remark-box
+---
+:kind: warning
+---
+
+**Nested virtualization has been disabled since July 13, 2026.**
+
+The Cloud Hypervisor backend was turned off following the recently reported guest-to-host escape vulnerabilities in KVM -
+first [Januscape](https://github.com/V4bel/Januscape), and later [Zapscape](https://github.com/V4bel/Zapscape).
+Until a fix is in place, playgrounds can only run on the Firecracker backend, so the recipe below is currently non-functional.
+::
+
 ## Motivation
 
 This recipe shows how to run virtual machines **inside** playground VMs -
