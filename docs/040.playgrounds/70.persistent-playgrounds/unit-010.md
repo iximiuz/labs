@@ -6,7 +6,7 @@ kind: unit
 ---
 
 For a long time, iximiuz Labs playgrounds were fully ephemeral. You'd start a new environment,
-perform some tasks in it for up to 8 hours, but eventually, the playground would have to be
+perform some tasks in it for up to a few hours, but eventually, the playground would have to be
 terminated and its data completely removed.
 
 While ephemeral playgrounds remain a completely valid (and still dominant) way to use the labs,
