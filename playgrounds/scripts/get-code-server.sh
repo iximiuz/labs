@@ -5,6 +5,8 @@ ln -s / $HOME/.rootfs
 
 curl -fsSL https://code-server.dev/install.sh | sh
 
+rm -f $HOME/.cache/code-server/code-server_*.deb
+
 mkdir -p $HOME/.local/share/code-server/User
 cat <<EOF > $HOME/.local/share/code-server/User/settings.json
 {
