@@ -28,14 +28,10 @@ see the [next unit](/docs/labs-mcp/connecting-your-ai-tool#coding-agents-and-ide
 
 *Works on chatgpt.com, the desktop apps, and mobile.*
 
-1. Enable developer mode: **Settings → Apps & Connectors → Advanced settings**.
-2. Back in **Apps & Connectors**, click **Create** (custom connector).
-3. Paste the connector URL (`https://labs.iximiuz.com/mcp`) as the MCP server URL and save.
+1. Enable developer mode: **Settings → [Security and login](https://chatgpt.com/plugins#settings/Security) → Developer mode → Toggle Enabled**.
+2. Navigate to **[Plugins](https://chatgpt.com/plugins)** in the sidebar and click the **Plus** button in the top right corner.
+3. Enter the name (e.g., `ixlabs`) and paste the connector URL (`https://labs.iximiuz.com/mcp`) as the MCP server URL and save.
 4. Sign in to iximiuz Labs when prompted and approve access.
-
-::remark-box
-Custom connectors require a paid ChatGPT plan.
-::
 
 ## What happens on the first use
 

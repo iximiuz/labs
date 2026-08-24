@@ -42,14 +42,14 @@ See [Connecting Your AI Tool](/docs/labs-mcp/connecting-your-ai-tool) for per-cl
 
 While the possibilities are endless, there are four main use cases for Labs MCP:
 
-## 1. Your AI coach
+## 1. Personalized Tutor
 
 Tell your assistant what you're trying to learn, and it will search the entire Labs catalog -
 tutorials, challenges, courses, skill paths - and pick the materials that match your level.
 There's no one-size-fits-all approach to learning: tell it where you are and where you want to get to,
 and it will assemble a personal learning path from the materials available on the platform.
 
-And when you get stuck mid-challenge, your coach can check your task state, run diagnostics
+And when you get stuck mid-challenge, your tutor can check your task state, run diagnostics
 in the same VM, and nudge you toward the next step.
 
 ```
@@ -63,7 +63,7 @@ Progress is recorded server-side - attempts, completions, and daily practice sta
 whether you learn in the browser or through your assistant.
 ::
 
-## 2. Playground builder
+## 2. Playground Builder
 
 [Preparing a practice environment](/docs/custom-playgrounds) can be a challenge in itself:
 writing init scripts, baking rootfs images, debugging the failing boot.
@@ -81,7 +81,7 @@ and start it again with one call.
 › Deploy a demo microservice app on K0s and break it in three subtle ways. Don't tell me what you broke.
 ```
 
-## 3. Agent sandbox
+## 3. Remote Infrastructure for Agents
 
 Coding agents are great at both writing and running code - but a typical agent sandbox you get is a locked-down container,
 which is only good for a limited subset of workloads.
@@ -93,7 +93,11 @@ Or what if you want your agent to debug a Kubernetes deployment in a real multi-
 A Labs playground gives your agent up to five real Linux VMs, connected into whatever network topology
 the task requires - sized for real server-side and DevOps work, not just code snippets.
 
-And unlike black-box cloud sandboxes, you see - and keep - everything:
+::highlight
+Your agent can stay right where it is — in a coding tool, a CI job, in its own sandbox, or even be a bare chat assistant. When it needs somewhere real to run things, Labs MCP gives it remote Linux machines to build on, deploy to, test against, and leave behind in a reproducible state. **Your agent doesn't need to run on Labs to work on Labs.**
+::
+
+Unlike black-box cloud sandboxes, you see - and keep - everything:
 [SSH in](/docs/playgrounds/how-to-ssh) any time to watch your agent work or take over mid-task,
 [expose ports](/docs/playgrounds/expose-http-ports) as public HTTPS URLs to demo what it built,
 and [persist the environment](/docs/playgrounds/persistent-playgrounds) to resume tomorrow.
@@ -104,7 +108,7 @@ and [persist the environment](/docs/playgrounds/persistent-playgrounds) to resum
 › Set up a 3-tier app across five VMs - an LB, two instances of the API service, and a replicated DB.
 ```
 
-## 4. Create and teach (pro)
+## 4. Create and Teach (Pro)
 
 iximiuz Labs isn't just for learners - authors publish hands-on tutorials and challenges here,
 and trainers run whole courses and workshops. Labs MCP brings an assistant into that workflow, too:

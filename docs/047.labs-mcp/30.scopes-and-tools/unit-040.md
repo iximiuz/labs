@@ -6,7 +6,7 @@ kind: unit
 ---
 
 The largest group - and the one that powers both the
-[playground builder and the agent sandbox](/docs/labs-mcp/what-is-labs-mcp#four-reasons) use cases:
+[playground builder and the remote infrastructure](/docs/labs-mcp/what-is-labs-mcp#four-reasons) use cases:
 starting VMs, running commands, exposing ports, and authoring custom playgrounds.
 
 ::remark-box

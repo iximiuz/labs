@@ -7,7 +7,7 @@ kind: unit
 
 ## Learning
 
-The tools behind the [AI coach](/docs/labs-mcp/what-is-labs-mcp#four-reasons) use case:
+The tools behind the [personalized tutor](/docs/labs-mcp/what-is-labs-mcp#four-reasons) use case:
 coaching you through content and tracking your progress.
 
 **Read** (`learning:read`):
