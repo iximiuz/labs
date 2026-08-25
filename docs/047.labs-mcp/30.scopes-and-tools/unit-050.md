@@ -15,6 +15,7 @@ and why agents are instructed to confirm intent before creating or updating anyt
 | Tool | What it does |
 | --- | --- |
 | `get_author_profile` | Your author profile: bio, avatar, social links, stats, and the public page URL. |
+| `get_content_access` | See who can list, read, and start a piece of content you authored. |
 
 **Write** (`author:write`):
 
@@ -23,6 +24,7 @@ and why agents are instructed to confirm intent before creating or updating anyt
 | `create_author_profile` | Create your author profile - a prerequisite for creating content. |
 | `update_author_profile` | Update your display name, bio, avatar, or social links. |
 | `create_content` | Start a new draft tutorial, challenge, course, skill path, roadmap, or blog post. |
+| `set_content_access` | Make your content public, private, or shared with specific people - e.g., to let a reviewer see a draft. |
 
 Drafts created this way land in your usual authoring flow -
 review and publish them as described in the [Content Authoring](/docs/content-authoring/how-to-publish-content) module.
@@ -31,4 +33,6 @@ review and publish them as described in the [Content Authoring](/docs/content-au
 › Do I have an author profile yet?
 
 › Start a draft tutorial titled 'Debugging DNS Inside Containers'.
+
+› Share my draft challenge with github user octocat.
 ```

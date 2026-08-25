@@ -19,14 +19,16 @@ Shell commands run only in plays **you own**.
 
 | Tool | What it does |
 | --- | --- |
-| `list_playgrounds` | Browse official, community, or your own custom playgrounds. |
-| `get_playground_manifest` | Inspect a playground's machines, networks, and setup. |
 | `list_plays` | List your running and stopped plays, or recent runs. |
 | `get_play` | A running play's live status: machines, conditions, expiry. |
 | `get_play_tasks` | Your task progress in a running challenge (spoiler-free). |
 | `list_kernel_sources` | List the VM kernels you can pick for custom machines. |
 | `list_rootfs_sources` | List the base OS images available for custom machines. |
 | `scan_ports` | Scan a VM for listening ports without exposing them. |
+| `get_playground_access` | See who can list, read, and start your custom playground. |
+
+Finding and inspecting playgrounds themselves needs no scope at all -
+that's `search_playgrounds` and `get_playground` from the [discovery tools](/docs/labs-mcp/scopes-and-tools#discovery-tools).
 
 **Write** (`playground:write`):
 
@@ -47,6 +49,7 @@ Shell commands run only in plays **you own**.
 | `update_playground` | Replace a custom playground's manifest. |
 | `remove_playground` | Delete a custom playground. |
 | `save_play_as_playground` | Snapshot a stopped play into a new reusable playground. |
+| `set_playground_access` | Make a custom playground public, private, or shared with specific people. |
 
 A few things worth knowing about how agents use these tools in practice:
 
