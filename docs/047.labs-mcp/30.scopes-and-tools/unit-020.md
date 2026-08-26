@@ -16,9 +16,10 @@ without signing in to iximiuz Labs at all.
 
 | Tool | What it does |
 | --- | --- |
-| `search_content` | Search the learning materials - challenges, tutorials, courses and their lessons, skill paths, roadmaps, and blog posts - by free text and optional filters. |
+| `search_content` | Search the learning materials - challenges, tutorials, courses and their lessons, skill paths, roadmaps, and blog posts - by free text and/or facets: collection (official, independent, community, vendor), categories, tags, difficulty, and - when signed in - your completion status (todo, in progress, completed). The query is optional, so browsing by tags alone works too. |
+| `list_tags` | List the tags used across the content, most used first - the vocabulary for `search_content`'s tag facet. |
 | `get_content` | Fetch a single piece of content's metadata and, on request, its page markdown (access permitting). |
-| `search_playgrounds` | Find official, community, or your own custom playgrounds by keyword, filter, or category. |
+| `search_playgrounds` | Find official, community, or your own custom playgrounds by keyword, collection, or category. |
 | `get_playground` | Inspect a playground - its machines and networks - and, on request, its full manifest. |
 | `search_docs` | Search the iximiuz Labs documentation (the very docs you're reading). |
 | `get_doc` | Fetch a single documentation page - the platform's own manual. |
@@ -29,6 +30,8 @@ A few things to try:
 › Find beginner-friendly Kubernetes challenges on iximiuz Labs.
 
 › What's the 'Reproduce a Docker Bridge Network' challenge about - and how hard is it?
+
+› Which official networking challenges haven't I solved yet?
 
 › Which official Kubernetes playgrounds are there?
 
