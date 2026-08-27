@@ -92,10 +92,15 @@ playground:
     number: 30080        # port number to expose
     machine: node-01     # machine to expose the port on
     # tls: true          # enable TLS if the target service uses HTTPS
+    # pane: right        # show in the right pane of the split-screen view (default: left)
+    # target: window     # or open in a new browser tab instead of an embedded pane
+                         # (for pages that refuse to load in an iframe); no pane then
 
   - kind: web-page       # embed an external web page as an iframe tab
     name: example.com    # user-defined name of the tab
     url: https://example.com
+    # pane: right        # same options are available for web-page tabs
+    # target: window
 
   # Protect the playground's registry (registry.iximiuz.com)
   # with a username and password. Default: no authentication,
@@ -1344,11 +1349,24 @@ playground:
     number: 30080        # port number to expose
     machine: node-01     # machine to expose the port on
     # tls: true          # enable TLS if the target service uses HTTPS
+    # pane: right        # show in the right pane of the split-screen view (default: left)
+    # target: window     # or open in a new browser tab instead of an embedded pane
+                         # (for pages that refuse to load in an iframe); no pane then
 
   - kind: web-page       # embed an external web page as an iframe tab
     name: example.com    # user-defined name of the tab
     url: https://example.com
+    # pane: right        # same options are available for web-page tabs
+    # target: window
 ```
+
+Any tab can be placed in the right pane of the split-screen view with `pane: right` (the default is `left`) -
+handy for showing a web UI next to a terminal from the very first second of the playground's life.
+
+Not every web page can be embedded in an iframe, though - many sites send `X-Frame-Options` or `Content-Security-Policy` headers that forbid framing,
+and some apps simply misbehave when framed. For such cases, set `target: window` on an `http-port` or `web-page` tab:
+the tab still shows up in the playground's tab bar, but clicking it opens the page in a new browser tab instead of an embedded pane
+(the default is `target: pane`). Since such tabs live outside the page, they take no `pane`.
 
 ### Interacting with Tabs from Markdown
 
