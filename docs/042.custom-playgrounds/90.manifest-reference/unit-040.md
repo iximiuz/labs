@@ -31,6 +31,8 @@ kind: unit
 | `hostRewrite` | string | `http-port` | Rewrite the `Host` header for servers that validate it. |
 | `pathRewrite` | string | `http-port` | Rewrite the URL path when the app isn't served from `/`. |
 | `url` | string | `web-page` | The external page to embed. |
+| `pane` | string | all | `left` (default) or `right` - which pane of the split-screen view the tab lives in. Must be omitted when `target` is `window`. |
+| `target` | string | `http-port`, `web-page` | `pane` (default) renders the tab in an embedded pane; `window` opens it in a new browser tab on click (for pages that can't be framed). |
 | `id` | string | all | Auto-generated (`<kind>-<machine>`); set explicitly only to disambiguate multiple tabs of the same kind on one machine. |
 
 A bare `- machine: <name>` entry is shorthand for a terminal tab on that machine.

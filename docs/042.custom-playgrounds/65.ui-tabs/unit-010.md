@@ -66,6 +66,7 @@ A playground can have from 1 to 10 tabs. A few composition rules:
 - A bare `- machine: <name>` entry is a shorthand for a terminal tab on that machine.
 - Machines with `noSSH: true` never get terminal tabs - a tidy way to keep helper VMs out of the UI.
 - Tab IDs are auto-generated as `<kind>-<machine>`; set `id` explicitly only when you need several tabs of the same kind on the same machine (e.g., two terminals side by side).
+- `pane: right` places a tab in the right pane of the split-screen view (the default is `left`); `target: window` tabs (see below) open outside the page and take no `pane`.
 
 ## HTTP port tabs
 
@@ -83,3 +84,21 @@ A few extra knobs for less common backends:
 ::remark-box
 💡 If the application takes a while to start (e.g., it's launched by an [init task](/docs/custom-playgrounds/init-tasks)), the tab may initially render an error page - a reload once the service is up fixes it.
 ::
+
+## Opening tabs in a new browser tab
+
+Not every page works inside an iframe - many sites send `X-Frame-Options`/`Content-Security-Policy` headers that forbid embedding, and some apps simply misbehave when framed. For such cases, mark an `http-port` or `web-page` tab with `target: window` (the default, `target: pane`, renders it in an embedded pane): the tab still shows up in the playground's tab bar, but clicking it opens the target in a new browser tab instead of switching to an embedded one:
+
+```yaml
+  tabs:
+    - kind: web-page
+      name: Grafana Docs
+      url: https://grafana.com/docs/
+      target: window
+    - kind: http-port
+      name: Dashboard
+      number: 3000
+      target: window
+```
+
+The same option is available in the playground settings UI and in the "Manage tabs" dialog of a running playground. New-window tabs can't be the default tab and can't have a `pane`.
