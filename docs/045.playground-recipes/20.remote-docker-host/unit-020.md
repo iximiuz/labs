@@ -30,7 +30,7 @@ The above command uses a local `docker` CLI to trigger a Docker build on the pla
 (i.e., the playground VM acts as an image builder).
 ::
 
-Alternatively, you can __push__ the image to the playground VM's private registry using the following command:
+Alternatively, you can __push__ the image to the playground's [private registry](/docs/playgrounds/container-registry) using the following command:
 
 ```sh
 docker buildx build --builder remote-builder \

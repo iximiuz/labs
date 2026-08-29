@@ -42,3 +42,4 @@ By default it's unauthenticated (but only accessible from within the playground)
 ```
 
 This is handy for practicing `docker login` flows and private-registry scenarios without leaving the sandbox.
+See [Configuring the Playground Registry](/docs/custom-playgrounds/playground-registry) for the details (and [Playground Container Registry](/docs/playgrounds/container-registry) for the user-facing overview).
