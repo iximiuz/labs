@@ -25,6 +25,12 @@ without signing in to iximiuz Labs at all.
 | `search_docs` | Search the iximiuz Labs documentation (the very docs you're reading). |
 | `get_doc` | Fetch a single documentation page - the platform's own manual. |
 
+::remark-box
+Why three search tools instead of one? Content, playgrounds, and docs have different filter criteria,
+and models kept confusing them when a single "omnisearch" tool covered all three.
+See [How Labs MCP Works](/docs/labs-mcp/how-labs-mcp-works) for this and other design notes.
+::
+
 A few things to try:
 
 ```

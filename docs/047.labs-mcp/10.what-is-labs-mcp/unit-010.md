@@ -36,11 +36,20 @@ https://labs.iximiuz.com/mcp
 ```
 
 The same URL works for every client - from chat assistants like Claude and ChatGPT to coding agents like Claude Code, Codex, or OpenCode.
-See [Connecting Your AI Tool](/docs/labs-mcp/connecting-your-ai-tool) for per-client instructions.
+See [Connecting Your AI Tool](/docs/labs-mcp/connecting-your-ai-tool) for per-client instructions,
+and [How Labs MCP Works](/docs/labs-mcp/how-labs-mcp-works) if you're curious what's behind the URL.
 
 ## Four Reasons to Use Labs MCP
 
-While the possibilities are endless, there are four main use cases for Labs MCP:
+While the possibilities are endless, there are four main use cases for Labs MCP.
+
+::remark-box
+---
+kind: tip
+---
+The prompts below are illustrative - for tested, copy-paste-ready examples with real results,
+see [Labs MCP in Practice](/docs/labs-mcp/labs-mcp-in-practice).
+::
 
 ## 1. Personalized Tutor
 

@@ -12,6 +12,13 @@ if your AI tool speaks MCP, it can connect. In every client, all you need is the
 https://labs.iximiuz.com/mcp
 ```
 
+Labs MCP has been tested with:
+
+- ChatGPT (web & desktop)
+- Claude (web & desktop)
+- Claude Code, Codex, and OpenCode (CLI)
+
+It also works with Gemini, Copilot, Cursor, Warp, Zed, and other MCP-capable clients.
 This unit covers the two most popular chat assistants; for Claude Code, Codex, Cursor, and friends,
 see the [next unit](/docs/labs-mcp/connecting-your-ai-tool#coding-agents-and-ides).
 
@@ -40,3 +47,18 @@ The first time your assistant tries a protected action (starting a playground, r
 you'll be taken to a consent screen listing exactly which permissions are requested -
 and you decide which ones to grant.
 See [Scopes and Tools](/docs/labs-mcp/scopes-and-tools) for the details.
+
+## Chat mode vs. work mode
+
+Both assistants offer a plain **chat mode** and an agentic **work/cowork mode** (ChatGPT agent mode, Claude Cowork),
+and Labs MCP works in either. Which one to pick depends on the task:
+
+- **Chat mode** is enough for the [personalized tutor](/docs/labs-mcp/labs-mcp-in-practice#personalized-tutor) scenarios:
+  searching the catalog, assembling a learning path, getting a hint for a running challenge.
+  It works on the web, in the desktop apps, and on your phone.
+- **Work/cowork mode** is what you want for [building playgrounds](/docs/labs-mcp/labs-mcp-in-practice#playground-builder)
+  and [running workloads](/docs/labs-mcp/labs-mcp-in-practice#remote-infrastructure-for-agents):
+  these are long, multi-step tasks (often 5-30 minutes with debugging along the way),
+  and a single chat context fills up quickly once large Kubernetes and playground manifests get into it.
+
+CLI coding agents (Claude Code, Codex, OpenCode, ...) are agentic by nature and handle all of the above.
