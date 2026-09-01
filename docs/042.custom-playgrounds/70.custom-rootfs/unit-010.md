@@ -87,6 +87,9 @@ A rootfs image is not a regular application container image - it becomes the roo
   - Images built from a plain distro base (e.g. `FROM ubuntu`) need systemd, sshd, and standard system files added.
 - **Users:** any user referenced in the manifest's `users` list must already exist in the image (`root` always does; official images also ship `laborant`).
 
+If a machine built from your image doesn't come up, its serial console output (kernel messages and the init system's boot sequence) is the first thing to check -
+it's available in the **Boot Logs** tab of the [Play Debug Console](/docs/debugging-playgrounds/debugging-toolbox) and via `labctl playground machine console <play-id> <machine>`.
+
 ::remark-box
 💡 If building an image feels like too much, there is a "click-ops" alternative: start an off-the-shelf playground, install everything interactively, then **stop** the running instance, and [save it as a custom playground](/docs/playgrounds/persistent-playgrounds#saving-as-custom).
 ::

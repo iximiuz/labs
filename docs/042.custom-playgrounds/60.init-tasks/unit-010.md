@@ -89,6 +89,9 @@ init_start_services  dev-01   running    true  false
 While the tasks are still running, you can already SSH into the machines (`labctl ssh <play-id> -m <machine>`)
 and inspect the environment - handy for figuring out why a script misbehaves.
 
+For a closer look - each task's exit code and captured stdout/stderr, the machines' boot logs, and a live stream of a machine's systemd journal -
+use the Play Debug Console or the `labctl playground machine` commands described in [Debugging Playgrounds](/docs/debugging-playgrounds).
+
 ## Parameterized playgrounds
 
 Init tasks can be made conditional on **init conditions** - user-supplied parameters requested at start time:

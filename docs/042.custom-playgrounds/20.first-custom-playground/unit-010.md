@@ -190,6 +190,9 @@ The typical development loop looks like this:
 3. `labctl playground start my-first-playground-fda7ebc1` and verify the changes.
 4. `labctl playground destroy <play-id>` (using the instance ID printed by `start`), and repeat.
 
+When a start doesn't go as planned - a machine never comes up, an init task fails, the environment isn't what the manifest promised -
+[Debugging Playgrounds](/docs/debugging-playgrounds) shows where to look: the boot logs, the task output, and the effective play spec are a click (or a `labctl` command) away.
+
 The same playground can also be edited in the Playground Constructor UI - add `/settings` to its page URL - and any UI changes will show up in the next `labctl playground manifest` dump.
 
 When a playground has outlived its usefulness, remove it with:

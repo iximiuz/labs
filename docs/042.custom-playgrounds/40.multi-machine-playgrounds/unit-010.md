@@ -84,6 +84,9 @@ PLAY_ID=$(labctl playground start client-server-lab-...)
 labctl ssh $PLAY_ID -m server-01
 ```
 
+Machines can also be rebooted, shut down, and booted again one at a time, without touching the rest of the playground -
+see [`labctl playground machine`](/docs/debugging-playgrounds/labctl-playground-machine) in Debugging Playgrounds.
+
 For custom subnets, static IPs, and isolated network segments, see [Multi-Network Playgrounds](/docs/custom-playgrounds/multi-network-playgrounds).
 
 ## Per-machine configuration
