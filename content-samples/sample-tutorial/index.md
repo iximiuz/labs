@@ -34,6 +34,37 @@ playground:
   # Name of the base playground is the only required attribute.
   name: k3s
 
+  # Startup files are baked into the playground's machine filesystems before
+  # they boot, so it's a perfect place to pre-configure a machine before the
+  # very first init task or login session starts. Up to 20 entries per manifest.
+  startupFiles:
+    - path: /home/laborant/.bashrc
+      content: |
+        export SOME_ENV_VAR=some-value
+
+        export PS1='\u@\h:\w (overwritten)\$ '
+
+      append: true # skip if the file needs to be overwritten (or created)
+      # owner: UID:GID # default: 0:0 if append is false, otherwise the file owner is kept
+      # mode: <octal>   # default: "644" if append is false, otherwise the file mode is kept
+      machines: [dev-machine] # optional; omitted = every machine of the play
+
+    # A file fetched instead of inlined: from this content's own __static__
+    # folder, or from an https URL.
+    # - path: /usr/local/bin/setup.sh
+    #   source: __static__/setup.sh
+    #   owner: root
+    #   mode: "755"
+
+    # A tar/tar.gz/tgz source unpacked into path before the machine boots
+    # (owner defaults to root). labctl builds __static__/<folder>.tar.gz from
+    # a sibling <folder>/ directory on every `labctl content push`, so keep
+    # the sources in the folder (and .labctlignore it) - no build step needed.
+    # - path: /home/laborant/app
+    #   source: __static__/app.tar.gz
+    #   extract: true
+    #   owner: laborant
+
   # List available machines. By default, all playground machines are available,
   # but once you define the `machines` attribute, only the explicitly listed
   # subset of machines will be added to the playground.
@@ -43,20 +74,6 @@ playground:
     resources:
       cpuCount: 1
       ramSize: "1Gi"
-    # Startup files are created on the machine during its initialization.
-    # You can specify up to 10 files per machine. Files are created before
-    # the machine boots, so it's a perfect place to pre-configure the machine
-    # before the very first init task or login session starts.
-    startupFiles:
-      - path: /home/laborant/.bashrc
-        content: |
-          export SOME_ENV_VAR=some-value
-
-          export PS1='\u@\h:\w (overwritten)\$ '
-
-        append: true # skip if the file needs to be overwritten (or created)
-        # owner: UID:GID # default: 0:0 if append is false, otherwise the file owner is kept
-        # mode: <octal> # default: 0644 if append is false, otherwise the file mode is kept
     # users: ...
     # noSSH: ...
 
@@ -535,6 +552,7 @@ and can be referenced in the tutorial's markdown using the `__static__` prefix t
 
 - Embed images (see [How to Embed Images](#how-to-embed-images) below)
 - Expose files (e.g., helper scripts) to be downloaded by the playground VMs
+- Bake files (or whole directories) straight into a playground VM before it boots, via `playground.startupFiles` with `source: __stаtic__/<path>` - see [Startup files](/docs/custom-playgrounds/init-tasks#startup-files)
 
 **Unlike other files in the tutorial's directory, the `__static__` folder is publicly accessible**,
 so you should not put any internal use-only information in it.
@@ -630,27 +648,16 @@ slides:
 ---
 ::
 
-#### Help! My Images Aren't Updating
+#### Updating Images and Other Static Assets
 
-Images are cached by the CDN for up to 1 year and the cache key is the image's filename.
-This means that if you want to update an image you previously uploaded,
-you need to change the filename. You can follow a simple naming convention:
+Static assets are cached by the CDN (and browsers) for up to 1 year, but every reference
+the platform renders is pinned to the content's version. Re-upload an image under the same
+name, push the content, and the pages pick up the new file right away - no renaming or
+cache-busting needed.
 
-```sh
-__stаtic__/image-v1.png
-__stаtic__/image-v2.png
-...
-```
-
-::remark-box
----
-kind: warning
----
-
-With the above naming convention, you'll also need to update the markdown references(s) to the image
-every time you upload a new version of the image file.
-::
-
+Startup files fetched from `__static__` work the same way, including the archives that
+`labctl` builds from a sibling folder (see the `startupFiles` comments in this tutorial's
+front matter): edit the sources, push, and the next playground start gets the new version.
 
 ### How to Embed Code Snippets
 
@@ -1271,6 +1278,21 @@ For example, here is how the playground of the current tutorial was customized:
 playground:
   name: k3s
 
+  # Startup files are baked into the playground's machine filesystems before
+  # they boot, so it's a perfect place to pre-configure a machine before the
+  # very first init task or login session starts. Up to 20 entries per manifest.
+  startupFiles:
+    - path: /home/laborant/.bashrc
+      content: |
+        export SOME_ENV_VAR=some-value
+
+        export PS1='\u@\h:\w (overwritten)\$ '
+
+      append: true # skip if the file needs to be overwritten (or created)
+      # owner: UID:GID # default: 0:0 if append is false, otherwise the file owner is kept
+      # mode: <octal>   # default: "644" if append is false, otherwise the file mode is kept
+      machines: [dev-machine] # optional; omitted = every machine of the play
+
   # List available machines. By default, all playground machines are available,
   # but once you define the `machines` attribute, only the explicitly listed
   # subset of machines will be added to the playground.
@@ -1280,20 +1302,6 @@ playground:
     resources:
       cpuCount: 1
       ramSize: "1Gi"
-    # Startup files are created on the machine during its initialization.
-    # You can specify up to 10 files per machine. Files are created before
-    # the machine boots, so it's a perfect place to pre-configure the machine
-    # before the very first init task or login session starts.
-    startupFiles:
-      - path: /home/laborant/.bashrc
-        content: |
-          export SOME_ENV_VAR=some-value
-
-          export PS1='\u@\h:\w (overwritten)\$ '
-
-        append: true # skip if the file needs to be overwritten (or created)
-        # owner: UID:GID # default: 0:0 if append is false, otherwise the file owner is kept
-        # mode: <octal> # default: 0644 if append is false, otherwise the file mode is kept
     # users: ...
     # noSSH: ...
 

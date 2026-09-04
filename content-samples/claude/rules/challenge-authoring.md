@@ -27,58 +27,40 @@ Per-machine welcome messages should be concise and factual. They shouldn't resta
 
   If neither applies, omitting `timeout_seconds` keeps the frontmatter clean and signals "ordinary, sub-minute task".
 
-## Setup Artifacts: Never Inline, Always Fetch from `__static__`
+## Setup Artifacts: Never Inline, Always Ship as a Startup File
 
-- **NEVER inline a mini-program, `Dockerfile`, config, or any script-ish artifact longer than ~a dozen lines into an `index.md` task `run:` block.** Embedding a server, checker, or `Dockerfile` as a heredoc inside a YAML block scalar is brittle and a recurring source of bugs: YAML re-indentation silently mangles Python/Makefile indentation, quoting and `$(...)`/backticks/`$VAR` need fragile escaping, and the artifact becomes impossible to review, lint, or test in isolation. Store it as a real file under the challenge's `__static__/` folder and `wget` it in an init task instead. Short snippets (a `mkdir`, a few `echo`s, a one-liner check) are fine to keep inline.
-- **How `__static__` serving works.** Every file in a published content's `__static__/` folder is served at the GLOBAL URL `https://labs.iximiuz.com/__static__/<filename>`. It only becomes available *after* `labctl content push`, and it is cached — always pass `wget --no-cache` and append a cache-buster `?t=$(date +%s)` so a re-pushed artifact is picked up on the next challenge start. `wget` is available on the playground VMs.
+- **NEVER inline a mini-program, `Dockerfile`, config, or any script-ish artifact longer than ~a dozen lines into an `index.md` task `run:` block.** Embedding a server, checker, or `Dockerfile` as a heredoc inside a YAML block scalar is brittle and a recurring source of bugs: YAML re-indentation silently mangles Python/Makefile indentation, quoting and `$(...)`/backticks/`$VAR` need fragile escaping, and the artifact becomes impossible to review, lint, or test in isolation. Store it as a real file under the challenge's `__static__/` folder and declare it as a `playground.startupFiles` entry instead. Short snippets (a `mkdir`, a few `echo`s, a one-liner check) are fine to keep inline.
+- **How this works.** A `startupFiles` entry with `source: __static__/<file>` is fetched and cached by the platform, then baked into the machine's filesystem *before it boots* — before any init task or login session. It only becomes available *after* `labctl content push`, but there's no cache-buster to manage: each start always gets the current content, so editing an artifact is just re-pushing it. Set `owner`/`mode` (or `append: true`) on the entry, and `machines: [...]` if it should only land on some machines.
 
 ### Single file
 
-Put e.g. `telemetry_server.py` in `__static__/`, then fetch it in an init task:
+Put e.g. `telemetry_server.py` in `__static__/`, then declare it as a startup file:
 
 ```yaml
-  init_fetch_server:
-    init: true
-    run: |
-      mkdir -p /opt/iximiuz-labs
-      wget --no-cache -q "https://labs.iximiuz.com/__static__/telemetry_server.py?t=$(date +%s)" \
-        -O /opt/iximiuz-labs/telemetry_server.py
+playground:
+  startupFiles:
+    - path: /opt/iximiuz-labs/telemetry_server.py
+      source: __static__/telemetry_server.py
+      owner: root
+      mode: "644"
 ```
 
-### Multiple related files → tar-archive with a Makefile
+### Multiple related files → a folder that `labctl` archives for you
 
-When the setup is a small project (e.g. `Dockerfile` + `main.go` + `go.mod`, or a server plus its checker), keep the sources in a sibling subfolder (conventionally `app/`) and add a `Makefile` that tars them into `__static__/<name>.tar.gz`. This is the established repo pattern:
-
-```makefile
-CUR_DIR := $(shell dirname $(realpath $(firstword $(MAKEFILE_LIST))))
-
-.PHONY: build clean
-
-build: __static__/app.tar.gz
-
-__static__/app.tar.gz: $(shell find app -type f)
-	mkdir -p ${CUR_DIR}/__static__
-	tar -czf ${CUR_DIR}/__static__/app.tar.gz -C ${CUR_DIR}/app .
-
-clean:
-	rm -f ${CUR_DIR}/__static__/app.tar.gz
-```
-
-Run `make` before pushing — the generated `__static__/<name>.tar.gz` is the artifact that ships. Fetch and unpack it in an init task:
+When the setup is a small project (e.g. `Dockerfile` + `main.go` + `go.mod`, or a server plus its checker), keep the sources in a sibling subfolder of the challenge (conventionally `app/`) and declare `__static__/<folder>.tar.gz` (or `.tgz`, `.tar`) as a single startup file with `extract: true`. There is no build step: `labctl content push` notices a startup file whose `source` is `__static__/app.tar.gz` next to an `app/` folder and creates the archive from the folder's files itself - on every push, and on every change in `--watch` mode. The platform unpacks the archive into `path` before the machine boots, so there's no init task to unpack it at all:
 
 ```yaml
-  init_fetch_app:
-    init: true
-    user: laborant
-    run: |
-      mkdir -p ~/app && cd ~/app
-      wget --no-cache -q "https://labs.iximiuz.com/__static__/app.tar.gz?t=$(date +%s)" -O app.tar.gz
-      tar -xzf app.tar.gz
-      rm app.tar.gz
+playground:
+  startupFiles:
+    - path: /home/laborant/app
+      source: __static__/app.tar.gz
+      extract: true
+      owner: laborant
 ```
 
-- **Editing an artifact later** means re-running `make` (for tarballs) and re-pushing the `__static__/` file; the cache-buster ensures the next challenge start fetches the new version.
-- **`.labctlignore`** any human-facing files that live next to the sources but must not be pushed as content (e.g. `app/README.md`), or `labctl content push` 400s with `Content kind challenge does not support files with kind undefined`.
+- **No `Makefile`, no `make build`, no `tar` step.** The folder is the source of truth; the generated `__static__/<folder>.tar.gz` is a build artifact that doesn't need to be committed. (A hand-made archive still works - `labctl` only builds one when a sibling `<folder>/` exists.)
+- **`.labctlignore` the folder** (`app/`) so its files aren't also pushed as loose content files - `labctl` keeps watching it anyway. A `.labctlignore` *inside* the folder excludes files from the archive too (e.g. `README.md`). Without the ignore, `labctl content push` may 400 with `Content kind challenge does not support files with kind undefined` on human-facing files.
+- **Editing an artifact later** means editing the file (or the folder) and re-pushing - the next challenge start always fetches the current version, no cache-buster needed.
 
 ## User Input Tasks
 

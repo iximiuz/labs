@@ -22,6 +22,7 @@ cover: https://...        # cover image URL (uploaded via the UI)
 playground:
   networks: [...]         # see Networks
   machines: [...]         # see Machines
+  startupFiles: [...]     # see Startup files
   tabs: [...]             # see Tabs
   initTasks: {...}        # see Init tasks
   initConditions: {...}   # see Init tasks
@@ -40,6 +41,7 @@ playground:
 | `markdown` | string | no | Landing-page body (up to 100,000 characters). |
 | `cover` | string | no | Cover image URL; in practice managed via the UI's `/settings` page. |
 | `playground` | object | yes | The technical spec - detailed in the following units. |
+| `playground.startupFiles` | list | no | Files baked into the playground's machines before they boot; see [Startup files](/docs/custom-playgrounds/init-tasks#startup-files). |
 
 The two commands that consume manifests have different expectations:
 

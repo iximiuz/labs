@@ -28,11 +28,6 @@ kind: unit
       resources:
         cpuCount: 2
         ramSize: 2GiB
-      startupFiles:
-        - path: /home/laborant/.bashrc
-          append: true
-          content: |
-            alias k=kubectl
       noSSH: false
 ```
 
@@ -45,7 +40,6 @@ kind: unit
 | `drives` | list | required | See below. |
 | `network.interfaces` | list | required | At least one interface; see [Networks](/docs/custom-playgrounds/manifest-reference#networks). |
 | `resources` | object | auto-computed | See below. |
-| `startupFiles` | list | - | See below. |
 | `noSSH` | bool | `false` | Disables SSH access and hides the machine's terminal tab. |
 
 ## Users
@@ -82,12 +76,4 @@ Per-VM and per-playground totals are capped by your plan (free tier: 2 vCPU / 4 
 
 ## Startup files
 
-| Field | Type | Default | Notes |
-|---|---|---|---|
-| `path` | string | required | Absolute path; parent directories are created. |
-| `content` | string | required | File content. |
-| `append` | bool | `false` | Append instead of overwrite. |
-| `owner` | string | `0:0` | `user`, `user:group`, or numeric `UID[:GID]`. |
-| `mode` | string | `"644"` | Octal permissions, without the leading zero (e.g. `"600"`, not `"0600"`). |
-
-Up to 10 startup files per machine.
+`machines[].startupFiles` (shown in older dumps) is the legacy, per-machine form of [startup files](/docs/custom-playgrounds/init-tasks#startup-files). It's still accepted and can be combined with the playground-level `playground.startupFiles` list above - existing per-machine lists keep working unchanged and are never reformatted, while the playground-level form (targets any machine, and is what the settings UI and MCP tools produce) is recommended for new manifests. When both are present for a machine, the playground-level entries are applied first, then that machine's own `startupFiles`.
