@@ -26,7 +26,7 @@ The console has three tabs (the refresh button in the tab bar reloads the active
 
 - **Play Spec** - the full JSON representation of the play as the platform sees it:
   the `status` with the history of state transitions (`stateEvents`) and the **boot conditions** of the play and of every machine
-  (`DriveSourcePulled`, `RootfsBaked`, `StartupFilesBakedIn`, `MachineUsersResolved`, `GuestNetworkingConfigured`, `SandboxStarted`, ... - each `True`, `False`, or `Unknown`,
+  (`DriveSourcePulled`, `RootfsBaked`, `StartupFilesFetched`, `StartupFilesBakedIn`, `MachineUsersResolved`, `GuestNetworkingConfigured`, `SandboxStarted`, ... - each `True`, `False`, or `Unknown`,
   with a timestamp and, when something went wrong, a `message`); the effective `machines` list with the resolved drives, network interfaces, users, resources, VM backend and kernel;
   the `tasks` map with the status of every task; the expiration and idle timeouts; the resolved tabs and port forwards.
 - **Boot Logs** - the **serial console** output of a machine: kernel messages, the init system's boot sequence, and the early platform bootstrap.

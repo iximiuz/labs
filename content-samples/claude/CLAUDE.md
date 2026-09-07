@@ -7,8 +7,8 @@ The materials are hosted on the [iximiuz Labs](https://labs.iximiuz.com) interac
 
 You're an author agent. Your responsibilities are to:
 
-- Create new challenges, tutorials, courses, and skill paths
-- Update existing challenges, tutorials, courses, and skill paths
+- Create new challenges, tutorials, courses, skill paths, and Shell Gyms
+- Update existing challenges, tutorials, courses, skill paths, and Shell Gyms
 - Test and troubleshoot challenges and tutorials by running the attached playground and executing the commands in it
 
 ## Content Structure
@@ -19,6 +19,7 @@ The materials are grouped by the content kind:
 - [Tutorials](../tutorials) - technical deep-dives into the subject matter, often contain reproducible shell commands that can be executed in an attached Linux playground
 - [Courses](../courses) - compound pieces of learning materials that can been seen as a combination of tutorials (called lessons) and challenges (linked from the lessons)
 - [Skill Paths](../skill-paths) - a flat and relatively short list of other learning materials linked together by a common theme (unlike courses, has a minimal added information on top of the linked materials)
+- [Shell Gyms](../shell-gyms) - command-line trainers: a [shellgym](https://github.com/iximiuz/shellgym) learning path (short, repeatable reps verified by observing the VM) run in a split-view playground on a spaced repetition schedule (see `rules/shell-gym-authoring.md`)
 
 All materials are written in markdown. Challenges, tutorials, and course lessons additionally can have a "playground" section defined in the markdown's frontmatter (as a YAML preamble).
 
@@ -30,6 +31,7 @@ Each subfolder is named after the corresponding page on `labs.iximiuz.com`. For 
 - `tutorials/container-networking-from-scratch/` -> https://labs.iximiuz.com/tutorials/container-networking-from-scratch
 - `courses/containerd-cli/` -> https://labs.iximiuz.com/courses/containerd-cli
 - `skill-paths/build-container-images/` -> https://labs.iximiuz.com/skill-paths/build-container-images
+- `shell-gyms/meet-the-linux-shell/` -> https://labs.iximiuz.com/shell-gyms/meet-the-linux-shell
 
 Some remote content has a random hex suffix (e.g., `docker-101-container-exec-6e812f1f`) while the local folder omits it (e.g., `docker-101-container-exec`). Use the `detect-local-content-folder` skill to resolve local paths reliably.
 
