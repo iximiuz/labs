@@ -176,6 +176,17 @@ tasks:
     # configure the timeout with the `timeout_seconds` property.
     timeout_seconds: 90
 
+  # An init task whose stdout feeds a play variable (see the `vars` section
+  # below): the pod IP is only known once the pod has been scheduled, so it
+  # can't be written into the content upfront.
+  init_lookup_nginx_ip:
+    init: true
+    machine: dev-machine
+    needs:
+      - init_expose_nginx
+    run: |
+      kubectl get pod nginx-01 -o jsonpath='{.status.podIP}'
+
   # Regular tasks are used to check if certain system conditions are met
   # and/or requested user actions are completed. Each regular task should
   # have a visual representation in the content's body, and the total/done
@@ -223,11 +234,12 @@ tasks:
     needs:
       - input_container_name
     env:
-      # A handy way to pass the output of a previous task to the current one
-      # is to use the a template variable x(.needs.task_name.stdout|stderr).
-      # This example illustrates how to pass the output of the `input_container_name`
-      # task to the `verify_container_is_running` task.
-      - CONTAINER_NAME=x(.needs.input_container_name.stdout)
+      # A handy way to pass data from a previous task to the current one is
+      # the template variable x(.needs.task_name.stdout|stderr|exit_code|input|status).
+      # This example takes what the user typed into the `input_container_name`
+      # task (its `.input`); `.stdout` would work here too, since that task
+      # echoes its input.
+      - CONTAINER_NAME=x(.needs.input_container_name.input)
     # The task engine also defines a number of higher-level helper functions
     # that can be used in the `run` script. For example, `docker_container_is_running`
     # is a helper function that checks if a container is running.
@@ -294,6 +306,23 @@ tasks:
     run: |
       curl node-01:30080
       sleep 5
+
+# Play variables: values resolved inside the playground and substituted into
+# the content (see the "Play Variables" section below).
+vars:
+  # The (trimmed) stdout of a task - here, the nginx pod IP discovered by the
+  # init_lookup_nginx_ip task; available once that task is completed.
+  NGINX_POD_IP: x(.tasks.init_lookup_nginx_ip.stdout)
+  # The name the user typed into the input_container_name task (available
+  # once that task is completed).
+  CONTAINER_NAME: x(.tasks.input_container_name.input)
+  # A one-off shell command, run on the playground machine; its trimmed
+  # stdout becomes the value.
+  SESSION_ID:
+    shell: head -c4 /dev/urandom | od -An -tx1 | tr -d ' \n'
+    machine: dev-machine
+  # The status of a task (completed) - handy for gating content sections.
+  CONTAINER_CHECK: x(.tasks.verify_container_is_running.status)
 
 
 # EMBEDDED CHALLENGES
@@ -1693,11 +1722,12 @@ tasks:
     needs:
       - input_container_name
     env:
-      # A handy way to pass the output of a previous task to the current one
-      # is to use the a template variable x(.needs.task_name.stdout|stderr).
-      # This example illustrates how to pass the output of the `input_container_name`
-      # task to the `verify_container_is_running` task.
-      - CONTAINER_NAME=x(.needs.input_container_name.stdout)
+      # A handy way to pass data from a previous task to the current one is
+      # the template variable x(.needs.task_name.stdout|stderr|exit_code|input|status).
+      # This example takes what the user typed into the `input_container_name`
+      # task (its `.input`); `.stdout` would work here too, since that task
+      # echoes its input.
+      - CONTAINER_NAME=x(.needs.input_container_name.input)
     # The task engine also defines a number of higher-level helper functions
     # that can be used in the `run` script. For example, `docker_container_is_running`
     # is a helper function that checks if a container is running.
@@ -1877,6 +1907,66 @@ You can register your own helper functions by creating shell scripts in the foll
 ```sh
 /opt/iximiuz-labs/examiner/checks.d
 ```
+::
+
+### Play Variables
+
+Tasks can also feed values back into the content.
+A **play variable** is declared in the top-level `vars` Front Matter section and resolved inside the playground:
+
+```yaml
+vars:
+  # A fixed value.
+  PORT: "8080"
+
+  # A value template: the x() syntax has access to the tasks
+  # (x(.tasks.<name>.stdout|stderr|exit_code|input|status)) and to other vars (x(.vars.<name>)).
+  # The var resolves as soon as all the referenced tasks are completed (and vars resolved).
+  NGINX_POD_IP: x(.tasks.init_lookup_nginx_ip.stdout)   # the (trimmed) output of a task
+  CONTAINER_NAME: x(.tasks.input_container_name.input)  # the input of a user-input task
+  URL: http://x(.vars.NGINX_POD_IP):x(.vars.PORT)/       # composed from other vars
+
+  # A one-off shell command: its trimmed stdout becomes the value.
+  # The command is retried until it exits with 0, so it can wait for a service to come up.
+  SESSION_ID:
+    shell: head -c4 /dev/urandom | od -An -tx1 | tr -d ' \n'
+    machine: dev-machine  # optional; defaults to the first machine of the playground
+```
+
+Once resolved, a variable can be used:
+
+- In the markdown via a binding `{{ vars.NAME || 'fallback shown until resolved' }}` (single quotes only),
+  or as a click-to-copy inline code element with `:code-var{name=NAME}` (`default='...'` overrides the placeholder).
+  Bindings are not expanded inside inline code or code blocks (use `code-var` for copyable values),
+  and a binding inside a table cell is not supported (it fails the markdown validation) - use a list instead.
+- In the tasks' `run`, `env`, `hintcheck`, and `failcheck` scripts via `x(.vars.NAME)` - such a task stays blocked until the variable is resolved.
+
+For example, the nginx pod deployed by this tutorial's init tasks got the IP :code-var{name=NGINX_POD_IP}
+(the `init_lookup_nginx_ip` task printed it, and the `NGINX_POD_IP` variable picked it up from the task's stdout),
+this tutorial's session ID is :code-var{name=SESSION_ID}, and the container name you've entered above is {{ vars.CONTAINER_NAME || '(not entered yet)' }}.
+
+### Conditional Content
+
+The `conditional` component shows the section (a named slot) matching the current value of a variable,
+or the unnamed (default) section while the variable is unresolved or has no matching section.
+Since a variable referring to a task resolves only after the task is completed,
+this is also the way to gate a part of the content on a verification (make the task print the section name, or use its `status`, which is always `completed` once resolved):
+
+```markdown
+::conditional{var=CONTAINER_CHECK}
+Complete the "container is running" task above to unlock this section.
+
+#completed
+Well done - here is the next part of the story...
+::
+```
+
+::conditional{var=CONTAINER_CHECK}
+Complete the "container is running" task above to unlock this section.
+
+#completed
+Well done - here is the next part of the story. The content of this section is delivered to the browser
+together with the rest of the tutorial, so the gating is a UX device rather than a security boundary.
 ::
 
 ### Dynamic Hints and Failure Conditions
