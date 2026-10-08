@@ -1813,7 +1813,7 @@ docker_image_id() {
 }
 
 docker_image_size_bytes() {
-  docker image inspect --format '{{.Size}}' "$@"
+  docker history --no-trunc --human=false --format '{{.Size}}' "$@" | awk '{s += $1} END {print s}'
 }
 
 ###############################################################################
