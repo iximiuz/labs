@@ -52,8 +52,18 @@ The daemon binary is at `/opt/shellgym/shellgym` in the VM:
 
 ```sh
 labctl ssh <playground-id> -- sudo /opt/shellgym/shellgym validate --path /opt/shellgym/path
-labctl ssh <playground-id> -- sudo /opt/shellgym/shellgym solve --path /opt/shellgym/path
+labctl ssh <playground-id> -- /opt/shellgym/shellgym solve --path /opt/shellgym/path
 ```
+
+Run `solve` WITHOUT `sudo`, as the path's observed user (`shellUser`, normally `laborant` - the `labctl ssh` login user). The solver types into a pty shell owned by the invoking user, and the daemon ignores exec events from any other uid: under `sudo` every `wait_exec` check times out (each unit fails after the 2-minute per-unit timeout, ~45 min for a 23-unit path). Only `validate` may run under `sudo`. A full path takes minutes, so run `solve` detached in the VM and poll the log with short `labctl ssh` calls instead of holding one long tunnel. Do NOT launch it as a plain `nohup ... &` background job from the non-interactive `labctl ssh` shell: a shell without job control starts background jobs with SIGINT (and SIGQUIT) ignored, the solver's pty shell and every command it runs inherit that disposition, and every `#!keys C-c` in a solve script becomes a no-op (the unit fails with "not completed within 2m0s" while its `sleep`/`cat` stays alive in the foreground, and every later unit then times out on a stuck shell). Reset the disposition on the way in, e.g.:
+
+```sh
+labctl ssh <playground-id> -- bash -s <<'EOF'
+nohup python3 -c 'import signal,os; signal.signal(signal.SIGINT, signal.SIG_DFL); os.execvp("/opt/shellgym/shellgym", ["shellgym","solve","--path","/opt/shellgym/path"])' > /tmp/solve.log 2>&1 < /dev/null &
+EOF
+```
+
+Then poll `/tmp/solve.log` (`labctl ssh <playground-id> -- cat /tmp/solve.log`) until the solver process is gone.
 
 `validate` lints and renders the path; `solve` types every unit's `solve:` script into a real shell and reports PASS/FAIL per unit (`--unit <id>` for one unit). Run `solve` on a fresh VM (Option A) - it depends on the scene being clean. Note that a student session runs the daemon with `--live`, which strips `solve:` scripts from the on-disk files; sessions started by the gym's author run without it.
 

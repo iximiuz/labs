@@ -2,7 +2,6 @@
 name: create-content
 description: Creates a new piece of content (challenge, tutorial, course, skill-path, shell-gym) on the remote server and scaffolds local source files.
 argument-hint: <kind> <name>
-disable-model-invocation: true
 ---
 
 Create a new piece of content of kind `$0` with name `$1`.

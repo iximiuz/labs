@@ -2,7 +2,6 @@
 name: debug-challenge
 description: Debugs an existing challenge by starting it, inspecting tasks, troubleshooting over SSH, fixing source files, and restarting. Use when a challenge's tasks are failing or hanging.
 argument-hint: <challenge-name>
-disable-model-invocation: true
 ---
 
 Debug the challenge `$0`. Follow these steps in order.

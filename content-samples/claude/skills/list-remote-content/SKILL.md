@@ -6,7 +6,7 @@ argument-hint: <kind>
 
 List remote content of kind `$0`.
 
-The valid kinds are: `challenge`, `tutorial`, `course`, `skill-path`.
+The valid kinds are: `challenge`, `tutorial`, `course`, `skill-path`, `shell-gym`.
 
 Run the following command:
 

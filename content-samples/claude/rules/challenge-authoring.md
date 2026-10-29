@@ -8,13 +8,17 @@ Use simple, clear, and concise "International English". Avoid fancy words and ov
 
 The problem statement in the index.md file should focus on the challenge itself, not the solution.
 Hinting at the solution is fine, especially in (collapsed by default) hint boxes.
-But NEVER include the exact commands to copy/paste or generic versions of such commands that only require some parameters to be filled in.
+Hints may name commands and show their flags and arguments (e.g., "the `--add-host <name>:host-gateway` flag of `docker run`"),
+but not every hint should spell out the command the learner needs - most hints should point to the idea or the place to look.
+The only strict no-go (unless the author asks otherwise) is the exact copy/pastable command that solves the task.
 
 Always try to connect the dots between the challenge and the real-world scenarios it prepares the student for and/or particular skills it helps develop.
 
 The challenge's title should start with a verb in the imperative mood. The challenge's name (i.e., the folder name and the URL slug) should look like a simplified title (e.g., `write-tcp-echo-server` for `Write a TCP Echo Server From Scratch`).
 
 Challenge descriptions should be concrete and factual. It should both outline the problem to be solved and the value the exercise provides to the learner.
+But do not add an explicit "Why This Matters" section, especially at the end of the problem statement.
+Instead, the importance of the problem should be naturally highlighted by the problem statement's framing and phrasing.
 
 Per-machine welcome messages should be concise and factual. They shouldn't restate the problem. Instead, they should describe the machine and its purpose, as well as highlighting its key components (if relevant for the challenge).
 
@@ -91,7 +95,7 @@ playground:
 - **Why stdout is better for small values.** A file is visible to anyone with shell access to that machine — for a *secret* shared between a server and its verifier, an on-disk copy is a leak waiting to happen, especially on the student-facing machine. The `stdout` channel is internal to the examiner: the student never sees init-task stdout, so the value stays out of their reach. It also keeps the data flow explicit in the `needs:`/`env:` graph instead of relying on an implicit file convention, and avoids file-permission/ownership pitfalls across machines and users.
 - **Prefer binding `x(...)` in the `env:` block over using it inline in `run:`.** It works in either place. The benefit of binding it once in `env:` (e.g. `- SECRET=x(.needs.init_gen_secret.stdout)`) is that the value is then available as `$SECRET` across all of the task's scripts — `run:`, `hintcheck:`, and `failcheck:` — instead of being re-expanded in each one.
 - **Producer task: emit exactly the value, no trailing noise.** Print just the value (e.g. `openssl rand -hex 32`, or `sha256sum file | awk '{print $1}'`). Because the captured stdout may pick up a trailing newline, normalize on the consuming side — `tr -d '[:space:]'` for shell comparisons, or `.strip()` in Python — so both sides agree byte-for-byte (a mismatched HMAC key from a stray `\n` is a maddening bug).
-- **Cross-machine flow:** a regular (verify) task may `needs:` an init task on *another* machine and read its `stdout` — declare it explicitly in `needs:`. (Only `init → init` cross-machine `needs:` is rejected by server validation.) Example: `init_gen_secret` runs on the `noSSH` server machine, a long-running server reads the secret via `systemd-run --setenv=...`, and the verifier on the dev machine pulls the *same* secret via `x(.needs.init_gen_secret.stdout)` — no copy of the secret ever touches disk on either box.
+- **Cross-machine flow:** any task (init or verify) may `needs:` a task on *another* machine and read its `stdout` — cross-machine `needs:` is fully supported, including `init → init`. The only gotcha: cross-machine dependencies are never implicit (only same-machine init tasks are auto-added to a regular task's `needs:`), so an init task from another machine must be listed in `needs:` explicitly. Example: `init_gen_secret` runs on the `noSSH` server machine, a long-running server reads the secret via `systemd-run --setenv=...`, and the verifier on the dev machine pulls the *same* secret via `x(.needs.init_gen_secret.stdout)` — no copy of the secret ever touches disk on either box.
 
 ### Secret Generation
 
@@ -120,23 +124,67 @@ playground:
 - **Remove the default `solution.md`** when using numbered solution files (but challenges with just one solution should keep it).
 - **Never start a solution with the "The key to this challenge is" phrase.** It's redundant and annoying. Write each solution as a natural story, tailored for the corresponding problem statement in the index.md file.
 
+## Task Completion Messages
+
+The `#completed` slot of a task component (`::simple-task`, `::user-input-task`) is shown only after the task
+has been solved, and the learner often never reads it. Its only purpose is to confirm that the action was
+performed correctly and, optionally, to congratulate or motivate the learner. Keep it to one short sentence:
+"Correct! The service reports this version." or "The record was replaced."
+
+NEVER put important information there: no explanations of why the answer is what it is, no facts about
+the tool or protocol the learner needs later, no pointers to the next task. Anything worth teaching goes
+where the learner reads it while working - the task description above the component, a hint box, or a
+remark box after the task.
+
+- Bad: `#completed` "Correct! A `201 Created` response also carries the URL of the new record in its `Location` header."
+- Good: task text mentions the `Location` header, `#completed` says "The artifact is registered."
+
 ## Hints
 
 - **Use the `hint-box` component** to show collapsed by default clues on how to solve the challenge.
-- NEVER INCLUDE THE EXACT SOLUTION IN THE HINT BOX (neither commands to copy/paste nor generic versions of such commands that only require some parameters to be filled in)
+- Never put the exact copy/pastable command that solves the task in a hint box (unless the author asks for it).
+  Mentioning commands, flags, and arguments is fine when it helps, e.g. "`--network host` shares the host's network namespace" or
+  "the `--add-host <name>:host-gateway` flag". Just do not turn every hint into the needed command - keep most hints at the level of
+  the idea or the place to look.
 
 ### Hint summary format
 
-Use one of two forms depending on complexity:
+The `:summary:` of a `hint-box` allows only three formats:
 
-```yaml
-# Simple numbered hints when the challenge has a small linear sequence:
+- `Hint <Seq No>` - numbered hints for a small linear sequence of clues (`Hint 1`, `Hint 2`, ...).
+- `Hint <Seq No>: <Short title>` - numbered hints whose subject is worth naming (`Hint 1: Where to start looking`).
+- `Hint: <Short title>` - a descriptive label when the hint is standalone or its subject matters more than the number.
+
+Quote the value in the two titled formats because of the colon.
+
+```md
+::hint-box
+---
 :summary: Hint 1
-:summary: Hint 2
+---
 
-# Descriptive label when the hint is standalone or the subject matters more than the number:
-:summary: "Hint: What this hint is about"
+Use tools that list block devices and look for one with no partitions.
+::
+
+::hint-box
+---
+:summary: "Hint 2: Finding the blank drive"
+---
+
+Use tools that list block devices and look for one with no partitions.
+::
+
+::hint-box
+---
+:summary: "Hint: Finding the blank drive"
+---
+
+Use tools that list block devices and look for one with no partitions.
+::
 ```
+
+No other formats are allowed. Do not use other separators after the number (`Hint 1 - Where to start looking`),
+and do not drop the `Hint` prefix (`Frontend debugging hint`, `ENTRYPOINT vs CMD`). Keep the short title to a few words.
 
 ### Dynamic (file-based) hints for verification tasks
 
@@ -185,8 +233,8 @@ Rules:
   is expensive and a secondary invariant must also hold. It follows the same file pattern.
 - Clean up the hint file at the top of `run:` (`rm -f`) so a stale file from a previous run
   does not mislead the user after a fix.
-- Hint messages should point to what is wrong or where to look — not how to fix it. Avoid
-  repeating the exact commands that solve the challenge.
+- Hint messages should point to what is wrong or where to look — not how to fix it. Never print the exact
+  copy/pastable command that solves the challenge.
 
 ## Testing Workflow
 

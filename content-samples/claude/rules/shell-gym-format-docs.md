@@ -63,7 +63,7 @@ repetition: [1, 3, 7, 14, 30]
 ---
 
 The markdown body is the gym's front page: a short, factual description of
-what reflexes the gym builds and why they matter. The reps themselves live in
+what skills the gym builds and why they matter. The reps themselves live in
 the units under `path/`, not here.
 
 The body supports the same expression means as tutorials (diagrams, image

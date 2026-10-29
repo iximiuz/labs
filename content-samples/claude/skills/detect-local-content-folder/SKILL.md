@@ -15,6 +15,7 @@ Find the local folder for content of kind `$0` with name `$1`.
    - `tutorial` -> `tutorials/`
    - `course` -> `courses/`
    - `skill-path` -> `skill-paths/`
+   - `shell-gym` -> `shell-gyms/`
 
 2. The folder either:
    - Matches the name **exactly**: `<kind-plural>/$1/`
