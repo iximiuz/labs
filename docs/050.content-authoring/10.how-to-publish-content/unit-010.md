@@ -45,3 +45,23 @@ Check out the following resources for more information:
 - [Sample Challenge](/challenges/sample-challenge) - a self-documenting sample challenge
 - [Sample Skill Path](/skill-paths/sample-skill-path) - a self-documenting sample skill path
 - [iximiuz Labs Content Samples (Markdown + YAML)](https://github.com/iximiuz/labs/tree/main/content-samples)
+
+## How to author content with an AI agent?
+
+[`labctl`](https://github.com/iximiuz/labctl) ships skills and rules that teach AI agents
+the content formats, the authoring conventions, and the `labctl` workflows for creating, pushing, and testing content on real playgrounds.
+Install them in the root of your content repository (the folder with the `challenges/`, `tutorials/`, `courses/`, `skill-paths/`, and `shell-gyms/` subfolders)
+for the agents you use - Claude Code, Codex, Cursor, GitHub Copilot, OpenCode, Gemini CLI, Antigravity, Devin, Warp, or Zed:
+
+```sh
+labctl skills install --agent claude
+```
+
+Then ask the agent to, for example, create a challenge on a topic of your choice and test it on a playground.
+
+::remark-box
+---
+kind: tip
+---
+Before submitting a challenge or a Shell Gym, ask the agent to review it.
+::

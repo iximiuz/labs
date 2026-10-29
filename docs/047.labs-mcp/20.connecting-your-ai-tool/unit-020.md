@@ -189,3 +189,12 @@ Running an agent with broad autonomy? Consider granting only the `playground:*` 
 the agent gets its VMs but cannot touch your learning progress, account settings, or author profile.
 More on this in [Scopes and Tools](/docs/labs-mcp/scopes-and-tools).
 ::
+
+::remark-box
+---
+kind: tip
+---
+Running an AI agent on a machine with [`labctl`](https://github.com/iximiuz/labctl)?
+Run `labctl skills install playgrounds --user --agent <agent>` (e.g., `--agent codex`) to also give it skills for starting, inspecting, and destroying playgrounds from the command line,
+or `labctl skills install --agent <agent>` in a content repository to add the content authoring skills and rules.
+::
